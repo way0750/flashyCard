@@ -1,4 +1,4 @@
-var flashy = angular.module('flashyCard', ['fileList', 'editApp', 'ngRoute']);
+var flashy = angular.module('flashyCard', ['study', 'fileList', 'editApp', 'ngRoute']);
 
 flashy.config(function($routeProvider, $httpProvider){
   $routeProvider
@@ -7,7 +7,8 @@ flashy.config(function($routeProvider, $httpProvider){
       controller : 'fileListCtrl'
     })
     .when('/study', {
-      templateUrl : '../study/study.html'
+      templateUrl : '../study/study.html',
+      controller : 'studyCtrl'
     })
     .when('/edit', {
       templateUrl : '../edit/edit.html',
@@ -20,8 +21,20 @@ flashy.config(function($routeProvider, $httpProvider){
 
 flashy.factory('getFileList', function($http){
 
+
+  var dataObj = {
+
+    fileList : null,
+    curStack : null,
+    curStackName : null
+
+  };
+
+  var globalData = function(){
+    return dataObj;
+  };
+
   var getFiles = function(){
-    console.log('got called');
     return $http({
       method: 'GET',
       url: "/listFiles"
@@ -40,19 +53,18 @@ flashy.factory('getFileList', function($http){
 
   return {
     getFiles : getFiles,
-    getStack : getStack
+    getStack : getStack,
+    dataObj : dataObj
   };
 
 });
 
 flashy.controller('flashyCardCtrl', function ($scope, $http, getFileList) {
-  $scope.fileList;
-
-  $scope.curStack = null;
   
   getFileList.getFiles().then(function(res){
-    $scope.fileList = res.data;
+    getFileList.dataObj.fileList = res.data;
   });
-
+  $scope.globalData = getFileList.dataObj;
+  console.log('in client.js the fileList and curStack are:', $scope.globalData);
 });//close controller
 
