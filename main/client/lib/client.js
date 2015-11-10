@@ -51,25 +51,27 @@ flashy.factory('getFileList', function($http){
   };//close getStack
 
   //to make q and a
-  var parseFile = function(str){
-    var cards = str.split(/\b(?=#)/);
-    console.log(cards);
+  var makeQandA = function(str){
+    // var cards = str.split(/\n/);
+    var cards = str.match(/(^#.+\n)+(^[^#].+\n)+/gm);
+    console.log(cards.length);
     //seperate each card into an obj with q and a
-    cards = cards.map(function(card){
-      var question = card.match(/^#.+/gm).join('\n');
-      var answer = card.match(/^[^#].+/gm).join('\n');
-      return {
-        question : question,
-        answer : answer
-      };
-    });
+    // cards = cards.map(function(card){
+    //   var question = card.match(/^#.+/gm).join('\n');
+    //   var answer = card.match(/^[^#].+/gm).join('\n');
+    //   return {
+    //     question : question,
+    //     answer : answer
+    //   };
+    // });
     return cards;
   };
-        
+
   return {
     getFiles : getFiles,
     getStack : getStack,
-    dataObj : dataObj
+    dataObj : dataObj,
+    makeQandA : makeQandA
   };
 
 });
