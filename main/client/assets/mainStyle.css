@@ -1,3 +1,6 @@
+body, textarea{
+  font: bolder 1em sans-serif;
+}
 
 .fileList {
 
