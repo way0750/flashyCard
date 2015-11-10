@@ -1,6 +1,6 @@
 var fileList = angular.module('fileList', []);
 
-fileList.controller('fileListCtrl', function ($scope, $http, getFileList) {
+fileList.controller('fileListCtrl', function ($scope, $http, getFileList, $location) {
 
   $scope.getFiles = function(){
     getFileList.getFiles().then(function(res){
@@ -14,10 +14,14 @@ fileList.controller('fileListCtrl', function ($scope, $http, getFileList) {
   //this function should do two things get file by $http save it in the client.curStack
   //then 
   $scope.getFile = function(){
-    console.log($scope.fileName);
-    getFileList.getStack($scope.fileName).then(function(data){
-      $scope.curStack = data;
-    });
-  };
+    getFileList.dataObj.curStackName = $scope.fileName;
+    getFileList.getStack($scope.fileName)
+      .then(function(data){
+        getFileList.dataObj.curStack = data;
+      })
+      .then(function(){
+        $location.path( '/study' );
+      });
+  };//close getFile
 
 });
