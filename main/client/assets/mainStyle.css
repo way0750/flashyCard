@@ -1,0 +1,37 @@
+
+.fileList {
+
+}
+
+.studyView {
+
+}
+
+.qna {
+
+}
+
+.scrachPaper {
+
+}
+
+.edit {
+  width : 80%;
+  height : 40em;
+}
+
+.entireStack {
+  background-color: yellow;
+  float: left;
+  width: 30%;
+  height: 30%;
+}
+
+.newCard, .visible{
+  background-color: yellow;
+}
+
+
+.invisible{
+  display: none;
+}
