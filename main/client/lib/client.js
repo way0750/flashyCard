@@ -28,8 +28,19 @@ flashy.factory('getFileList', function($http){
     });
   };
 
+  var getStack = function(fileName){
+    console.log('geting this stack:', fileName);
+    return  $http({
+      method: 'POST',
+      url: '/readFile',
+      data : {fileName : fileName}
+    });
+
+  };
+
   return {
-    getFiles : getFiles
+    getFiles : getFiles,
+    getStack : getStack
   };
 
 });

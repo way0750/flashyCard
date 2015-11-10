@@ -3,11 +3,20 @@
 should show all files
 should allow files picking from the file list
   once pick a file, http request to get that file from server;
+  and go straight to the study page to study the stack.
 also have a button to return to main page
 
 -->
 <div class = 'fileListView'>
   <button ng-click="getFiles()">reload files</button>
-  <div>all files {{fileList}}</div>
+  <h1>yo card stacks:</h1>
+  
+  <div>current stack<br>{{curStack.data}}</div>
+
+  <select ng-attr-size = {{fileList.length}} ng-model = 'fileName'>
+    <option ng-repeat = "file in fileList" ng-click = 'getFile()'>{{file}}</option>
+  </select>
+  
+
   <div></div>
 </div>
