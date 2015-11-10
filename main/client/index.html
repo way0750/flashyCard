@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="assets/mainStyle.css">
+  <script src="./bower_components/angular/angular.min.js" ></script>
+  <script src="./bower_components/angular-route/angular-route.js"></script>
+  <script src="./lib/client.js"></script>
+  <script src="./fileList/fileList.js"></script>
+  <script src="./edit/edit.js"></script>
+  <script src="./study/study.js"></script>
+
+  <title>flashy card</title>
+</head>
+<body>
+  <div ng-app = "flashyCard" ng-controller = 'flashyCardCtrl'>
+    <h1>persistent area do not change</h1>
+    current stack name : {{globalData.curStackName}}
+    <div ng-show="curStack===null">nothing has been selected</div>
+    <a ng-href='#/study'>study time !</a>
+    <a ng-href="#/edit">edit things</a>
+    <a ng-href="#/fileList">fileList</a>
+
+    <div ng-view>
+    </div>
+  </div>
+</body>
+</html>

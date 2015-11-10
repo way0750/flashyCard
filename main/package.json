@@ -1,0 +1,12 @@
+{
+  "name": "flashy_card",
+  "version": "1.0.0",
+  "description": "a flash card program for the creative minded",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "huiqiang huang (way)",
+  "license": "ISC",
+  "dependencies": {}
+}
