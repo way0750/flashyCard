@@ -15,5 +15,6 @@ editApp.controller('editAppCtrl', function ($scope, getFileList) {
   };
 
   $scope.globalData = getFileList.dataObj;
+  // Mousetrap.unbind('command+e');
 
 });

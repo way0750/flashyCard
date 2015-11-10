@@ -24,4 +24,18 @@ fileList.controller('fileListCtrl', function ($scope, $http, getFileList, $locat
       });
   };//close getFile
 
+  //testing key binding. make sure to unbind this in other view where it is not supposed to be used
+  //for example: in edit.js
+  
+  $scope.changePath = function (){
+    $location.path('/study');
+  };
+
+
+  // hotkeys.bindTo($scope)
+  //   .add({
+  //     combo: 'ctrl+w',
+  //     callback: $scope
+  // });
+
 });
