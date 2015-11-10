@@ -64,34 +64,30 @@ flashy.controller('flashyCardCtrl', function ($scope, $http, getFileList, $locat
   getFileList.getFiles().then(function(res){
     getFileList.dataObj.fileList = res.data;
   });
+  
   $scope.globalData = getFileList.dataObj;
-  console.log('in client.js the fileList and curStack are:', $scope.globalData);
 
   $scope.goEdit = function(event){
-    $location.path('/edit').replace();
+    event.preventDefault();
+    $location.path('/edit');
     $scope.$apply();
-    console.log($location.path());
   };
 
   $scope.goStudy  = function(event){
-    $location.path('/study').replace();
+    event.preventDefault();
+    $location.path('/study');
     $scope.$apply();
-    console.log($location.path());
   };
 
 
   $scope.goList  = function(event){
-    $location.path('/fileList').replace();
+    event.preventDefault();
+    $location.path('/fileList');
     $scope.$apply();
-    console.log($location.path());
-  };
-
-  $scope.showCurrentPath = function(event){
-    console.log($location.path(), $scope);
   };
 
   Mousetrap.bind('command+e', $scope.goEdit);
-  Mousetrap.bind('command+k', $scope.goStudy);
-  Mousetrap.bind('command+j', $scope.goList);
+  Mousetrap.bind('command+s', $scope.goStudy);
+  Mousetrap.bind('command+l', $scope.goList);
 });//close controller
 
