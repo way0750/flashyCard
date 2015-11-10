@@ -48,9 +48,24 @@ flashy.factory('getFileList', function($http){
       url: '/readFile',
       data : {fileName : fileName}
     });
+  };//close getStack
 
+  //to make q and a
+  var parseFile = function(str){
+    var cards = str.split(/\b(?=#)/);
+    console.log(cards);
+    //seperate each card into an obj with q and a
+    cards = cards.map(function(card){
+      var question = card.match(/^#.+/gm).join('\n');
+      var answer = card.match(/^[^#].+/gm).join('\n');
+      return {
+        question : question,
+        answer : answer
+      };
+    });
+    return cards;
   };
-
+        
   return {
     getFiles : getFiles,
     getStack : getStack,
@@ -64,7 +79,7 @@ flashy.controller('flashyCardCtrl', function ($scope, $http, getFileList, $locat
   getFileList.getFiles().then(function(res){
     getFileList.dataObj.fileList = res.data;
   });
-  
+
   $scope.globalData = getFileList.dataObj;
 
   $scope.goEdit = function(event){
@@ -79,7 +94,6 @@ flashy.controller('flashyCardCtrl', function ($scope, $http, getFileList, $locat
     $scope.$apply();
   };
 
-
   $scope.goList  = function(event){
     event.preventDefault();
     $location.path('/fileList');
@@ -88,6 +102,6 @@ flashy.controller('flashyCardCtrl', function ($scope, $http, getFileList, $locat
 
   Mousetrap.bind('command+e', $scope.goEdit);
   Mousetrap.bind('command+s', $scope.goStudy);
-  Mousetrap.bind('command+l', $scope.goList);
+  Mousetrap.bind('command+g', $scope.goList);
 });//close controller
 
