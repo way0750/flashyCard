@@ -16,8 +16,8 @@ fileList.controller('fileListCtrl', function ($scope, $http, getFileList, $locat
   $scope.getFile = function(){
     getFileList.dataObj.curStackName = $scope.fileName;
     getFileList.getStack($scope.fileName)
-      .then(function(data){
-        getFileList.dataObj.curStack = data;
+      .then(function(res){
+        getFileList.dataObj.curStack = res.data;
       })
       .then(function(){
         $location.path( '/study' );
