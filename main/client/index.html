@@ -18,13 +18,15 @@
 </head>
 <body>
   <div ng-app = "flashyCard" ng-controller = 'flashyCardCtrl'>
-    <h1>persistent area do not change</h1>
+    <div class = 'main'>
+    <h1>Flashy Card</h1>
     current stack name : {{globalData.curStackName}}
     <div ng-show="curStack===null">nothing has been selected</div>
+    <br>
     <a ng-href='#/study'>study time !</a>
     <a ng-href="#/edit">edit things</a>
     <a ng-href="#/fileList">fileList</a>
-
+    </div>
     <div ng-view>
     </div>
   </div>

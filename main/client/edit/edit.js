@@ -2,19 +2,21 @@ var editApp = angular.module('editApp', []);
 
 editApp.controller('editAppCtrl', function ($scope, getFileList) {
   
+  $scope.gData = getFileList.dataObj;
+
   $scope.classObj = {
     newCard : false,
-    invisible : true
+    invisible : $scope.gData.makingNewCard
   };
 
   $scope.newCard = function(){
     $scope.classObj = {
-      newCard : !$scope.classObj.newCard,
       invisible : !$scope.classObj.invisible
     };
+    console.log('in edit');
   };
 
   $scope.globalData = getFileList.dataObj;
-  // Mousetrap.unbind('command+e');
-
+  
+  Mousetrap.bind('command+j', $scope.newCard);
 });

@@ -2,6 +2,10 @@ body, textarea{
   font: bolder 1em sans-serif;
 }
 
+.main{
+  background-color: yellow;
+}
+
 .fileList {
 
 }
@@ -14,9 +18,34 @@ body, textarea{
 
 }
 
-.scrachPaper {
+.testArea{
+/*  position: fixed;
+  top: 30%;
+*/  
+  /*margin-right: auto; 
+  margin-left: auto;*/
+  float: left;
   width : 60%;
   height: 30em;
+
+}
+
+.question{
+  width : 100%;
+  padding: 1em 0em;
+  background-color: aqua;
+}
+
+.answer {
+  width : 100%;
+  background-color: yellow;
+  height: 20em;
+}
+
+.scrachPaper {
+  float: left;
+  width : 38%;
+  height: 20em;
 }
 
 .edit {
@@ -26,18 +55,39 @@ body, textarea{
 
 .entireStack {
   background-color: yellow;
-  float: left;
-  width: 30%;
-  height: 30%;
+  position: fixed;
+  top : 30%;
+  left : 1%;
+  width: 60%;
+  height: 60%;
+}
+
+.editViewEdit{
+  background-color: aqua;
+  position: fixed;
+  top : 30%;
+  right : 1%;
+  width: 36%;
+  height: 60%;
 }
 
 .newCard, .visible{
   background-color: yellow;
 }
 
+.newCardButton{
+  float: left;
+  height : 5em;
+}
+
+.saveButton{
+  float: left;
+  height : 5em; 
+}
 
 .invisible{
   display: none;
 }
 
 select option:empty { display:none }
+
