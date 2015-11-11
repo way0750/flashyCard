@@ -43,6 +43,7 @@ app.get('/listFiles', function(req, res, next){
 
 app.post('/writeFile', function(req, res, next){
   var fileName = req.body.fileName;
+  console.log('trying to save file', fileName, req.body.file);
   fs.writeFile(flashyDir+fileName, req.body.file, function(err){
     if (err){
       res.sendStatus(500);

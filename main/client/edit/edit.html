@@ -1,6 +1,6 @@
 <div class = 'edit'>
   <button ng-click="newCard()" class = 'newCardButton'> make new card {{classObj}}</button>
-  <button class = 'saveButton'>clich here to save</button>
-  <textarea class = 'entireStack' >{{globalData.curStack}}</textarea>
+  <button class = 'saveButton' ng-click = "sendFile()">clich here to save</button>
+  <textarea class = 'entireStack' ng-model = 'curStack'></textarea>
   <textarea class = 'editViewEdit'>go crazy here</textarea>
 </div>
