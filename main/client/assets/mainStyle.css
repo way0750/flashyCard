@@ -2,6 +2,19 @@ body, textarea{
   font: bolder 1em sans-serif;
 }
 
+h1{
+  margin: auto auto;
+}
+
+textarea {
+  background-color: #CCFFCC;
+}
+
+:root {
+  background-color: #339966;
+
+}
+
 .main{
   background-color: yellow;
 }
@@ -48,6 +61,13 @@ body, textarea{
   height: 20em;
 }
 
+button{
+  padding: 1.45em;
+  background-color: #007fff;
+  border : none;
+  font-weight: bold;
+}
+
 .edit {
   width : 80%;
   height : 40em;
@@ -87,6 +107,23 @@ body, textarea{
 
 .invisible{
   display: none;
+}
+
+select {
+  position: fixed;
+  width: 36%;
+  height: 60%;
+  left: 30%;
+  font : 2em monospace;
+  background-color: #CCFFCC;
+}
+
+option:nth-child(even){
+  background-color: green;
+}
+
+option:nth-child(odd){
+  background-color: aqua;
 }
 
 select option:empty { display:none }
