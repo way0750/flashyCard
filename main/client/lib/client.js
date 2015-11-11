@@ -54,6 +54,14 @@ flashy.factory('getFileList', function($http){
     });
   };//close getStack
 
+  var writeFile = function(fileObj){
+    return $http({
+      method: "POST",
+      url : "writeFile",
+      data : fileObj
+    });
+  };
+
   //to make q and a
   var makeQandA = function(str){
     // var cards = str.split(/\n/);
@@ -87,7 +95,8 @@ flashy.factory('getFileList', function($http){
     getStack : getStack,
     dataObj : dataObj,
     makeQandA : makeQandA,
-    shuffle : shuffle
+    shuffle : shuffle,
+    writeFile : writeFile
   };
 
 });
