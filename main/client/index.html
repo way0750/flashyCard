@@ -21,7 +21,10 @@
   <div ng-app = "flashyCard" ng-controller = 'flashyCardCtrl'>
     <div class = 'main'>
     <h1>Flashy Card</h1>
-    current stack name : {{globalData.curStackName}}
+    You are studying : 
+    <span ng-show = '!globalData.curStackName'>nothing!</span>
+    <span ng-show = 'globalData.curStackName'>{{globalData.curStackName}}</span>
+    <br>
     <div ng-show="curStack===null">nothing has been selected</div>
     <br>
     <a ng-href='#/study'>study time !</a>
