@@ -17,7 +17,10 @@ fileList.controller('fileListCtrl', function ($scope, $http, getFileList, $locat
     getFileList.dataObj.curStackName = $scope.fileName;
     getFileList.getStack($scope.fileName)
       .then(function(res){
-        getFileList.dataObj.curStack = res.data;
+        var stack = getFileList.dataObj.curStack = res.data;
+        stack = getFileList.makeQandA(stack);
+        getFileList.dataObj.shuffledStack = stack;
+        getFileList.dataObj.shuffledStack = getFileList.shuffle(stack);
       })
       .then(function(){
         $location.path( '/study' );

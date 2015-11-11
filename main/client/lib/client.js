@@ -26,7 +26,11 @@ flashy.factory('getFileList', function($http){
 
     fileList : null,
     curStack : null,
-    curStackName : null
+    curStackName : null,
+    shuffledStack : null,
+    curCardIndex : -1,
+    makingNewCard : false
+
 
   };
 
@@ -53,25 +57,37 @@ flashy.factory('getFileList', function($http){
   //to make q and a
   var makeQandA = function(str){
     // var cards = str.split(/\n/);
-    var cards = str.match(/(^#.+\n)+(^[^#].+\n)+/gm);
-    console.log(cards.length);
+    // var cards = str.match(/(^#.*\n)+(^[^#].*\n)+/gm);
+    var cards = str.match(/(^#.*\n*)+(^[^#].*\n*)+/gm);
     //seperate each card into an obj with q and a
-    // cards = cards.map(function(card){
-    //   var question = card.match(/^#.+/gm).join('\n');
-    //   var answer = card.match(/^[^#].+/gm).join('\n');
-    //   return {
-    //     question : question,
-    //     answer : answer
-    //   };
-    // });
+    cards = cards.map(function(card){
+      var question = card.match(/^#.+\n+/gm).join('\n');
+      var answer = card.match(/^[^#\n].+/gm).join('\n');
+      return {
+        question : question,
+        answer : answer
+      };
+    });
     return cards;
+  };
+
+  var shuffle = function(arr){
+    var copyArr = arr.slice();
+
+    var shuffleArr = [];
+    while(copyArr.length){
+      var i = Math.floor( Math.random() * copyArr.length );
+      shuffleArr = shuffleArr.concat(copyArr.splice(i, 1));
+    }
+    return shuffleArr;
   };
 
   return {
     getFiles : getFiles,
     getStack : getStack,
     dataObj : dataObj,
-    makeQandA : makeQandA
+    makeQandA : makeQandA,
+    shuffle : shuffle
   };
 
 });
@@ -102,8 +118,22 @@ flashy.controller('flashyCardCtrl', function ($scope, $http, getFileList, $locat
     $scope.$apply();
   };
 
+  $scope.makeNewCard = function(event){
+    event.preventDefault();
+    getFileList.dataObj.makingNewCard = !getFileList.dataObj.makingNewCard;
+    $scope.$apply();
+    console.log('makeNewCard????', getFileList.dataObj.makingNewCard);
+  };
+
+
   Mousetrap.bind('command+e', $scope.goEdit);
   Mousetrap.bind('command+s', $scope.goStudy);
   Mousetrap.bind('command+g', $scope.goList);
+  Mousetrap.bind('command+j', $scope.makeNewCard);
+  // Mousetrap.bind('enter', function(){
+  //   if ($location.path()!='/study'){console.log('not in /study!!!');} else {
+  //   console.log('show new question');}
+  //   getFileList.globalData.curCardIndex
+  // });
 });//close controller
 
