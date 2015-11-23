@@ -1,5 +1,3 @@
-
-
 ## Heading
 
 > like lego for flash card: don't just memorize, wonder and create. 
@@ -45,4 +43,3 @@
 ## Closing and Call to Action
 
 > Free to use before 1.0 release, get it now!
-
