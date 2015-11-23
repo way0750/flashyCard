@@ -28,7 +28,6 @@ editApp.controller('editAppCtrl', function ($scope, getFileList, $http) {
       fileName :  $scope.gData.curStackName,
       file : $scope.curStack
     });
-
   };//close sendFile
   
 });

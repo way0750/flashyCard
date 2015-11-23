@@ -22,15 +22,15 @@ flashy.config(function($routeProvider, $httpProvider){
 flashy.factory('getFileList', function($http){
 
 
-  var dataObj = {
+  dataObj = {
 
     fileList : null,
     curStack : null,
     curStackName : null,
     shuffledStack : null,
     curCardIndex : -1,
-    makingNewCard : false
-
+    makingNewCard : false,
+    scrachPaper : ''
 
   };
 
@@ -64,12 +64,11 @@ flashy.factory('getFileList', function($http){
 
   //to make q and a
   var makeQandA = function(str){
-    // var cards = str.split(/\n/);
-    // var cards = str.match(/(^#.*\n)+(^[^#].*\n)+/gm);
-    var cards = str.match(/(^#.*\n*)+(^[^#].*\n*)+/gm);
+    var cards = str.match(/(^#.*[\n\r]*)+(^[^#].*[\n\r]*)+/gm);
     //seperate each card into an obj with q and a
     cards = cards.map(function(card){
-      var question = card.match(/^#.+\n+/gm).join('\n');
+      var question = card.match(/^#.+[\n\r]+/gm).join('');
+      question = question.match(/^#.+/gm).join('\n');
       var answer = card.match(/^[^#\n].+/gm).join('\n');
       return {
         question : question,
@@ -131,18 +130,15 @@ flashy.controller('flashyCardCtrl', function ($scope, $http, getFileList, $locat
     event.preventDefault();
     getFileList.dataObj.makingNewCard = !getFileList.dataObj.makingNewCard;
     $scope.$apply();
-    console.log('makeNewCard????', getFileList.dataObj.makingNewCard);
   };
 
+  $scope.name = (new Date()).getTime();
 
   Mousetrap.bind('command+e', $scope.goEdit);
+  // Mousetrap.bind('enter', (function () {
+  //     this.goStudy();
+  //   }).bind($scope));
   Mousetrap.bind('command+s', $scope.goStudy);
   Mousetrap.bind('command+g', $scope.goList);
-  Mousetrap.bind('command+j', $scope.makeNewCard);
-  // Mousetrap.bind('enter', function(){
-  //   if ($location.path()!='/study'){console.log('not in /study!!!');} else {
-  //   console.log('show new question');}
-  //   getFileList.globalData.curCardIndex
-  // });
-});//close controller
 
+});//close controller

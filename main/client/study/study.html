@@ -1,12 +1,10 @@
 <div class = 'studyView'>
-  <!--textarea class = 'scrachPaper'>the length is {{stack.length}}------{{stack}} </textarea-->
-  <!--div class = 'question'> {{gData.shuffledStack[gData.curCardIndex].question}}</div-->
   <button ng-click="showOneCard()">next question</button>
   <button ng-click="showAnswer()">show answer</button>
   <button ng-click="restudy()">do it again</button>
+  <button ng-click="concat()">add to end of file</button>
   <div class = 'testArea'>
-    <div class = 'question'> {{gData.shuffledStack[gData.curCardIndex].question}}</div>
-    <div class = 'answer' ng-show = "state != 0"> {{gData.shuffledStack[gData.curCardIndex].answer}} </div>
+    <textarea class = 'question'> {{gData.shuffledStack[gData.curCardIndex].question}}</textarea>
+    <textarea class = 'answer' ng-show = "state != 0"> {{gData.shuffledStack[gData.curCardIndex].answer}} </textarea>
   </div>
-  <textarea class="scrachPaper" ></textarea>
 </div>

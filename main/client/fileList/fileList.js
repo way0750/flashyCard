@@ -19,10 +19,13 @@ fileList.controller('fileListCtrl', function ($scope, $http, getFileList, $locat
       .then(function(res){
         var stack = getFileList.dataObj.curStack = res.data;
         stack = getFileList.makeQandA(stack);
+        //get the questions and answers:
         getFileList.dataObj.shuffledStack = stack;
+        //then shuffle them:
         getFileList.dataObj.shuffledStack = getFileList.shuffle(stack);
       })
       .then(function(){
+        getFileList.dataObj.curCardIndex = -1;
         $location.path( '/study' );
       });
   };//close getFile
@@ -34,11 +37,5 @@ fileList.controller('fileListCtrl', function ($scope, $http, getFileList, $locat
     $location.path('/study');
   };
 
-
-  // hotkeys.bindTo($scope)
-  //   .add({
-  //     combo: 'ctrl+w',
-  //     callback: $scope
-  // });
 
 });
