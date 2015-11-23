@@ -12,10 +12,15 @@ also have a button to return to main page
   <button ng-click="changePath()">what is this?</button>
   <h1>yo card stacks:</h1>
 
-  <select ng-attr-size = {{fileList.length}} ng-model = 'fileName'>
+  <select class = "fileList" ng-attr-size = {{fileList.length}} ng-model = 'fileName'>
     <option ng-repeat = "file in fileList" ng-click = "getFile()">{{file}}</option>
   </select>
-  
+
+  <select class = "stackList" ng-attr-size = {{gData.allStacks.length+1}} ng-model = 'stackName'>
+    <option ng-repeat = "stack in gData.allStacks" ng-click = "chooseStack()" >
+    {{stack.stackIndex+1}}{{stack.stackName}}
+    </option>
+  </select>
 
   <div></div>
 </div>

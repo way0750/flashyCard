@@ -101,9 +101,16 @@ select {
   position: fixed;
   width: 36%;
   height: 60%;
-  left: 30%;
   font : 2em monospace;
   background-color: #CCFFCC;
+}
+
+select.fileList {
+  left: 10%;
+}
+
+select.stackList {
+  right: 10%;
 }
 
 option:nth-child(even){

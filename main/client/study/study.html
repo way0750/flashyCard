@@ -2,9 +2,11 @@
   <button ng-click="showOneCard()">next question</button>
   <button ng-click="showAnswer()">show answer</button>
   <button ng-click="restudy()">do it again</button>
-  <button ng-click="concat()">add to end of file</button>
+  <button ng-click="forgotCard()">forgot</button>
+  <button ng-click="deleteCard()">delete this</button>
   <div class = 'testArea'>
-    <textarea class = 'question'> {{gData.shuffledStack[gData.curCardIndex].question}}</textarea>
-    <textarea class = 'answer' ng-show = "state != 0"> {{gData.shuffledStack[gData.curCardIndex].answer}} </textarea>
+    <div ng-show = "progress > -1">count down: {{progress}} more to go!</div>
+    <textarea class = 'question'> {{curCard.question}}</textarea>
+    <textarea class = 'answer' ng-show = "state != 0"> {{curCard.answer}} </textarea>
   </div>
 </div>

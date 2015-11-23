@@ -22,37 +22,41 @@ flashy.config(function($routeProvider, $httpProvider){
 flashy.factory('getFileList', function($http){
 
 
-  dataObj = {
+//should have an array of stacks parsed from a file
+//then a curStackIndex which points to which stack is current being studied
+//then a shuffledStack which is an array of a shuffled stack from the array of stacks.
 
+  dataObj = {
+    allStacks : null,
     fileList : null,
-    curStack : null,
-    curStackName : null,
+    curStackIndex : 0,
+    curFileName : null,
     shuffledStack : null,
     curCardIndex : -1,
-    makingNewCard : false,
+    makingNewCard : false, // am i even using this at all?
+    curStack : null, //this will be gone
     scrachPaper : ''
-
   };
 
   var globalData = function(){
     return dataObj;
   };
 
-  var getFiles = function(){
+  var getFileList = function(){
     return $http({
       method: 'GET',
       url: "/listFiles"
     });
   };
 
-  var getStack = function(fileName){
+  var getFile = function(fileName){
     console.log('geting this stack:', fileName);
     return  $http({
       method: 'POST',
       url: '/readFile',
       data : {fileName : fileName}
     });
-  };//close getStack
+  };//close getFile
 
   var writeFile = function(fileObj){
     return $http({
@@ -64,18 +68,19 @@ flashy.factory('getFileList', function($http){
 
   //to make q and a
   var makeQandA = function(str){
-    var cards = str.match(/(^#.*[\n\r]*)+(^[^#].*[\n\r]*)+/gm);
+    var stack = str.match(/(^#.*[\n\r]*)+(^[^#].*[\n\r]*)+/gm);
     //seperate each card into an obj with q and a
-    cards = cards.map(function(card){
+    stack = stack.map(function(card, index){
       var question = card.match(/^#.+[\n\r]+/gm).join('');
       question = question.match(/^#.+/gm).join('\n');
       var answer = card.match(/^[^#\n].+/gm).join('\n');
       return {
         question : question,
-        answer : answer
+          answer : answer,
+          cardID : index
       };
     });
-    return cards;
+    return stack;
   };
 
   var shuffle = function(arr){
@@ -89,9 +94,14 @@ flashy.factory('getFileList', function($http){
     return shuffleArr;
   };
 
+  var parseStacks = function(str) {
+    return str.split(/(?=^#{1,2}[^#])/gm);
+  };
+
   return {
-    getFiles : getFiles,
-    getStack : getStack,
+    parseStacks : parseStacks,
+    getFileList : getFileList,
+    getFile : getFile,
     dataObj : dataObj,
     makeQandA : makeQandA,
     shuffle : shuffle,
@@ -102,7 +112,7 @@ flashy.factory('getFileList', function($http){
 
 flashy.controller('flashyCardCtrl', function ($scope, $http, getFileList, $location) {
   
-  getFileList.getFiles().then(function(res){
+  getFileList.getFileList().then(function(res){
     getFileList.dataObj.fileList = res.data;
   });
 
