@@ -52,6 +52,6 @@ flashy.controller('flashyCardCtrl', function ($scope, $http, getFileList, $locat
   
   Mousetrap.bind('command+e', $scope.goEdit);
   Mousetrap.bind('command+s', $scope.goStudy);
-  Mousetrap.bind('command+g', $scope.goList);  
+  Mousetrap.bind('command+g', $scope.goList); 
 
 });//close controller

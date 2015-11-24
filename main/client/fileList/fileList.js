@@ -1,9 +1,7 @@
 var fileList = angular.module('fileList', []);
 
 fileList.controller('fileListCtrl', function ($scope, getFileList, $location, viewsFactory) {
-  if (!getFileList.dataObj.crossViewMessage){
-    viewsFactory.resetPSA();
-  }
+  viewsFactory.resetPSA();
   //shouldn't show that note pad textarea:
   $('.scrachPaper').addClass('noShow');
 
@@ -24,6 +22,7 @@ fileList.controller('fileListCtrl', function ($scope, getFileList, $location, vi
     //get the file name from the select element
     getFileList.dataObj.curFileName = $scope.fileName;
     //get the file from server
+    $('.fileList').blur();
     getFileList.getFile($scope.fileName)
       .then(function(res){
         //once gets the text file from server
