@@ -1,11 +1,12 @@
-#what are the general steps to learning
-#what are the general steps to learning
-#what are the general steps to learning
-#what are the general steps to learning
+#how to learn:
+###what are the general steps to learning
+###what are the general steps to learning
+###what are the general steps to learning
+###what are the general steps to learning
 	step 1: getting and understanding info
 	step 2: condense and connect the notes
 	step 3: memorize and/or practices
-#why and how do you preview?
+###why and how do you preview?
 
 	why:
 	to find major conventions/concepts/big pattern to help pick out idea pieces and pattern to hang/connect things later on (to make meaning)
@@ -17,7 +18,7 @@
 	
 	and must actively predict the sturcture of the section/book, write the structure/topics down
 
-#step 1 of general learning: basic of understanding ideas? and in the step of diving in and understanding things, how do you do things(pieces here and there), what problem you must watch out?(too much thinking!)
+###step 1 of general learning: basic of understanding ideas? and in the step of diving in and understanding things, how do you do things(pieces here and there), what problem you must watch out?(too much thinking!)
 	
 	basics:
 	understanding ideas are all about elaborative rehearsal (using prior experience to make sense of new)
@@ -41,7 +42,7 @@
 	make sure to watch out for cognitive overload, 
 	take note: major concepts, terms, practices, anything common in subject/materials
 
-#step 2 of general learning: how do you condense and connect information for memorization and practice?
+###step 2 of general learning: how do you condense and connect information for memorization and practice?
 
 	Reduction: focus on overlapping concepts over individual ones
 	use less words
@@ -49,7 +50,7 @@
 	Optimization: more connections by organization
 	more graphic (like colored tables) the better!
 
-#step 3 of general learning: when comes to memorization and practice(develop skill), what's the goal and how to do each?
+###step 3 of general learning: when comes to memorization and practice(develop skill), what's the goal and how to do each?
 	the goals: to update and/or to 1, meaningfully 2,connect.
 	ex: experiment/practice/thought provactive challenges can introduce new way to update and connect
 
@@ -64,11 +65,11 @@
 	interleave performing them in a context close to application one
 	if skill needs to be highly transferable: then many contexts.
 
-#what are the things you have to pay attention to throughtout the process?
+###what are the things you have to pay attention to throughtout the process?
 	working memory overload
 	patterns(meanings)
 
-#when learning from new materials or new subject, what to find and collect?
+###when learning from new materials or new subject, what to find and collect?
 
 	if new subject: find and collect major/common concepts/terms/focus/practices/conventions/patterns
 
@@ -76,25 +77,25 @@
 
 	Use them as patterns to cut throught the new materials.
 
-#how to move new info from working memory to long term memory?
+###how to move new info from working memory to long term memory?
 	elaborative rehearsal with what you already know
 
-#each time you practice/memorize, why should you eleaboratively recall, re-rehearse new materials in many different senarios?
+###each time you practice/memorize, why should you eleaboratively recall, re-rehearse new materials in many different senarios?
 	recall and re-rehearse can produce meaning, desirable difficulty, which are great for retention, 
 	And because re-rehearsing with many different sanerios(topics/context/charllenges/experiment, etc...) make more connections which are great for retrieval.
 
-#rest/excercise how to do that?
+###rest/excercise how to do that?
 	sleep: about 7.5 hr/night and must have a set schedule
 	rest for 5 to 10 mins every hr of studying
 	exercising: 20 to 30 mins of intense running/day
 
-#working memory type and size, what does that mean for anything cognitive? and what to do about these facts?
+###working memory type and size, what does that mean for anything cognitive? and what to do about these facts?
 	working memory: abstract and visual
 	abstract has tiny capacity: 5+-2 pieces but visual is way bigger
 	working memory is the center of cognitive processing when overloaded, cognitive performance slows down.
 	must reduce overload by: out source info(writing), visulize things.
 
-#how do you develope skills? the basic and two types of practices. think parts and context and driving.
+###how do you develope skills? the basic and two types of practices. think parts and context and driving.
 	all about context trigger behavior
 
 	how to develope skills:
@@ -115,7 +116,7 @@
 
 	six once comfortable, switch to another context and do it over again
 
-#principals to better long term memory retention and retrieval? and their differences? (schedule, meaning, what does each task should do?)
+###principals to better long term memory retention and retrieval? and their differences? (schedule, meaning, what does each task should do?)
 	retention:
 	recall and increase desirable difficulty
 	schedule: long term spacing and interleave

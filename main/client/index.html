@@ -11,6 +11,7 @@
   <script src="./lib/mousetrap.min.js"></script>
 
   <script src="./lib/client.js"></script>
+  <script src="./lib/factory.js"></script>
   <script src="./fileList/fileList.js"></script>
   <script src="./edit/edit.js"></script>
   <script src="./study/study.js"></script>
@@ -27,7 +28,7 @@
     <br>
     <div ng-show="curStack===null">nothing has been selected</div>
     <br>
-    <textarea class="scrachPaper"></textarea>
+    <textarea class="scrachPaper" ng-show = "path != '/fileList'"></textarea>
     <a ng-href='#/study'>study time !</a>
     <a ng-href="#/edit">edit things</a>
     <a ng-href="#/fileList">fileList</a>
