@@ -1,4 +1,4 @@
-flashy.factory('getFileList', function($http){
+flashy.factory('getFileList', function($http, $location){
   //global data that shares across the app
   dataObj = {
     allStacks : null,
@@ -6,10 +6,7 @@ flashy.factory('getFileList', function($http){
     curStackIndex : null,
     curFileName : null,
     shuffledStack : null,
-    curCardIndex : -1,
-    makingNewCard : false, // am i even using this at all?
-    curStack : null, //this will be gone
-    scrachPaper : ''
+    curCardIndex : -1
   };
 
   //get list of all file name
@@ -82,7 +79,12 @@ flashy.factory('getFileList', function($http){
     return shuffleArr;
   };
 
+  var curPath = function () {
+    return $location.path() !== '/fileList';
+  };
+
   return {
+    curPath : curPath,
     makeStack : makeStack,
     parseStacks : parseStacks,
     getFileList : getFileList,

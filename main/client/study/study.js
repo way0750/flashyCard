@@ -1,6 +1,10 @@
 var studyApp = angular.module('study', []);
 var ggg = {hey:90};
 studyApp.controller('studyCtrl', function ($scope, getFileList, $location) {
+
+  //show that textarea:
+  $('.scrachPaper').removeClass('noShow');
+
   $scope.gData = getFileList.dataObj;
   //click a button then show, click again then next card
   //if state = 0 then you are seeing cards, if 1 then you are seeing answer
@@ -53,6 +57,7 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location) {
 
   $scope.deleteCard = function () {
     //splice current card by index from the allStack
+    if (!curStack || curStack.length===0){return;}
     var targetIndex = $scope.curCard.cardID;
     var stackIndex = $scope.gData.curStackIndex;
     var curStack = $scope.gData.allStacks[stackIndex];

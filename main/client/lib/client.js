@@ -28,13 +28,13 @@ flashy.controller('flashyCardCtrl', function ($scope, $http, getFileList, $locat
   $scope.gData = getFileList.dataObj;
 
   $scope.goEdit = function(event){
-    event.preventDefault();
+    if (event){event.preventDefault();}
     $location.path('/edit');
     $scope.$apply();
   };
 
   $scope.goStudy  = function(event){
-    event.preventDefault();
+    if (event){event.preventDefault();}
     if ($scope.gData.curStackIndex === null){
       $location.path('/fileList');
     } else {
@@ -44,23 +44,14 @@ flashy.controller('flashyCardCtrl', function ($scope, $http, getFileList, $locat
   };
 
   $scope.goList  = function(event){
-    event.preventDefault();
+    if (event){event.preventDefault();}
     $location.path('/fileList');
     $scope.$apply();
   };
-
-  $scope.makeNewCard = function(event){
-    event.preventDefault();
-    getFileList.dataObj.makingNewCard = !getFileList.dataObj.makingNewCard;
-    $scope.$apply();
-  };
-
-  $scope.name = (new Date()).getTime();
+  
 
   Mousetrap.bind('command+e', $scope.goEdit);
   Mousetrap.bind('command+s', $scope.goStudy);
   Mousetrap.bind('command+g', $scope.goList);
-
-  $scope.path = $location.path();
 
 });//close controller
