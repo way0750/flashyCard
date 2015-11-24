@@ -13,6 +13,7 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location, views
   //go through each card one by one, they have already been randomized.
   $scope.lastCardIndex = ($scope.gData.shuffledStack || []).length;
   
+  $scope.showGoToEdit = false;
   $scope.showOneCard = function(){
     var stack = $scope.gData.shuffledStack;
     if (stack.length === 0){
@@ -21,6 +22,12 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location, views
         question : 'You Are Done! This Is The End (╯°□°）╯︵ ┻━┻) ',
         answer : 'You Are Done! This Is The End (╯°□°）╯︵ ┻━┻) '
       };
+      if ($scope.showGoToEdit){
+        viewsFactory.showPSA('save you changes!');
+        $scope.gData.crossViewMessage = true;
+        $location.path('/edit');
+        // $scope.$apply(); somehow this in not needed????
+      }
     } else {
       $scope.curCard = stack.pop();
       $scope.state = 0;
@@ -47,6 +54,8 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location, views
     var canPerform = viewsFactory.showPSA('added card');
     if (!canPerform){return;}
 
+    $scope.showGoToEdit = true;
+
     var lastStackIndex = $scope.gData.allStacks.length-1;
     var lastStack = $scope.gData.allStacks[lastStackIndex];
     if (/update/.test(lastStack.stackName)){
@@ -63,6 +72,8 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location, views
     //splice current card by index from the allStack
     var canPerform = viewsFactory.showPSA('deleted card');
     if (!canPerform){return;}
+
+    $scope.showGoToEdit = true;
 
     var targetIndex = $scope.curCard.cardID;
     var stackIndex = $scope.gData.curStackIndex;

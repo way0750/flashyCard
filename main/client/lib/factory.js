@@ -1,14 +1,4 @@
 flashy.factory('getFileList', function($http, $location){
-  //global data that shares across the app
-  dataObj = {
-    allStacks : null,
-    fileList : null,
-    curStackIndex : null,
-    curFileName : null,
-    shuffledStack : null,
-    curCardIndex : -1
-  };
-
   //get list of all file name
   var getFileList = function(){
     return $http({
@@ -77,6 +67,17 @@ flashy.factory('getFileList', function($http, $location){
       shuffleArr = shuffleArr.concat(copyArr.splice(i, 1));
     }
     return shuffleArr;
+  };
+
+  //global data that shares across the app
+  dataObj = {
+    allStacks : null,
+    fileList : null,
+    curStackIndex : null,
+    curFileName : null,
+    shuffledStack : null,
+    curCardIndex : -1,
+    crossViewMessage: false
   };
 
   return {

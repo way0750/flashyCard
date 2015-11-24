@@ -1,7 +1,9 @@
 var fileList = angular.module('fileList', []);
 
 fileList.controller('fileListCtrl', function ($scope, getFileList, $location, viewsFactory) {
-  viewsFactory.resetPSA();
+  if (!getFileList.dataObj.crossViewMessage){
+    viewsFactory.resetPSA();
+  }
   //shouldn't show that note pad textarea:
   $('.scrachPaper').addClass('noShow');
 

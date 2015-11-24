@@ -20,7 +20,7 @@ flashy.config(function($routeProvider, $httpProvider){
     });//closes the $routeProvider
 });
 
-flashy.controller('flashyCardCtrl', function ($scope, $http, getFileList, $location) {
+flashy.controller('flashyCardCtrl', function ($scope, $http, getFileList, $location, viewsFactory) {
 
   getFileList.getFileList().then(function(res){
     getFileList.dataObj.fileList = res.data;
