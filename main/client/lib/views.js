@@ -1,20 +1,20 @@
 //add this after client.js
 flashy.factory('viewsFactory', function(){
-  var samePSA = {};
+  var PSA = {};
   var resetPSA = function () {
-    samePSA = {};
+    PSA = {};
     $('.announcement').text('');
     $('.announcement').css({'background-color' : 'green'});
   };
 
 
   var showPSA = function (message) {
-    if (samePSA[message]){
+    if (PSA[message]){
       $('.announcement').text('ALREADY '+message);
       $('.announcement').css({'background-color' : 'red'});
       return false;
     } else {
-      samePSA[message] = true;
+      PSA[message] = true;
       $('.announcement').text(message);
       $('.announcement').css({'background-color' : 'green'});
       return true;

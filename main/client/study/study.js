@@ -37,7 +37,6 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location, views
   $scope.restudy = function(){
     var curStackIndex = $scope.gData.curStackIndex;
     $scope.gData.shuffledStack = getFileList.shuffle($scope.gData.allStacks[curStackIndex]);
-    
   };
 
   $scope.showAnswer = function(){
@@ -55,7 +54,7 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location, views
     } else {
       var newStack = [];
       newStack.push($scope.curCard);
-      newStack.stackName = '#update';
+      newStack.stackName = '#----update----';
       $scope.gData.allStacks.push(newStack);
     }
   };

@@ -79,12 +79,7 @@ flashy.factory('getFileList', function($http, $location){
     return shuffleArr;
   };
 
-  var curPath = function () {
-    return $location.path() !== '/fileList';
-  };
-
   return {
-    curPath : curPath,
     makeStack : makeStack,
     parseStacks : parseStacks,
     getFileList : getFileList,

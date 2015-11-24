@@ -15,12 +15,13 @@ flashy.config(function($routeProvider, $httpProvider){
       controller : 'editAppCtrl'
     })
     .when('/',{
-      templateUrl : '../fileList/fileList.html' 
+      templateUrl : '../fileList/fileList.html',
+      controller: 'fileListCtrl'
     });//closes the $routeProvider
 });
 
 flashy.controller('flashyCardCtrl', function ($scope, $http, getFileList, $location) {
-  
+
   getFileList.getFileList().then(function(res){
     getFileList.dataObj.fileList = res.data;
   });
@@ -49,9 +50,8 @@ flashy.controller('flashyCardCtrl', function ($scope, $http, getFileList, $locat
     $scope.$apply();
   };
   
-
   Mousetrap.bind('command+e', $scope.goEdit);
   Mousetrap.bind('command+s', $scope.goStudy);
-  Mousetrap.bind('command+g', $scope.goList);
+  Mousetrap.bind('command+g', $scope.goList);  
 
 });//close controller
