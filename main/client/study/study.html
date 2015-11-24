@@ -1,8 +1,8 @@
 <div class = 'studyView'>
-  <button ng-click="showOneCard()">next question</button>
-  <button ng-click="showAnswer()">show answer</button>
+  <button ng-click="showOneCard()" class="nextQuestion">next question</button>
+  <button ng-click="showAnswer()" class="showAnswer">show answer</button>
   <button ng-click="restudy()">do it again</button>
-  <button ng-click="forgotCard()">forgot</button>
+  <button ng-click="forgotCard()" class="forgotCard">forgot</button>
   <button ng-click="deleteCard()">delete this</button>
   <div class = 'testArea'>
     <div ng-show = "progress > -1">count down: {{progress}} more to go!</div>

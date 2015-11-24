@@ -94,4 +94,16 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location, views
     }
   };
 
+  Mousetrap.bind('enter', function () {
+    angular.element('.nextQuestion').trigger('click');
+  });
+
+  Mousetrap.bind('space', function () {
+    angular.element('.showAnswer').trigger('click');
+  }); 
+
+  Mousetrap.bind('a', function () {
+    angular.element('.forgotCard').trigger('click');
+  }); 
+
 });
