@@ -1,7 +1,9 @@
 var editApp = angular.module('editApp', []);
 
 editApp.controller('editAppCtrl', function ($scope, getFileList, $http, viewsFactory) {
-  viewsFactory.resetPSA();
+  if (!getFileList.dataObj.crossViewMessage){
+    viewsFactory.resetPSA();
+  }
   //show that textarea:
   $('.scrachPaper').removeClass('noShow');
 
@@ -18,6 +20,8 @@ editApp.controller('editAppCtrl', function ($scope, getFileList, $http, viewsFac
    
     $scope.gData.curStackIndex = null;
     $scope.gData.allStacks = getFileList.makeStack($scope.curStackStringified);
+    viewsFactory.resetPSA();
+    $scope.gData.crossViewMessage = false;
     viewsFactory.showPSA('saved the world!');
   };//close sendFile
   //keep all stacks in one file in a form of array
