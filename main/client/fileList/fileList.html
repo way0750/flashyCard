@@ -12,7 +12,7 @@ also have a button to return to main page
   <button ng-click="changePath()">what is this?</button>
   <h1>yo card stacks:</h1>
 
-  <select class = "fileList" ng-attr-size = {{fileList.length}} ng-model = 'fileName'>
+  <select class = "fileList" ng-attr-size = {{fileList.length+1}} ng-model = 'fileName'>
     <option ng-repeat = "file in fileList" ng-click = "getFile()">{{file}}</option>
   </select>
 
