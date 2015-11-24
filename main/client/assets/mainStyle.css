@@ -121,5 +121,4 @@ option:nth-child(odd){
   background-color: aqua;
 }
 
-select option:empty { display:none }
-
+select option:empty, .noShow { display:none }

@@ -2,6 +2,9 @@ var editApp = angular.module('editApp', []);
 
 editApp.controller('editAppCtrl', function ($scope, getFileList, $http) {
   
+  //show that textarea:
+  $('.scrachPaper').removeClass('noShow');
+
   $scope.gData = getFileList.dataObj;
 
   //$scope.gData.allStacks
