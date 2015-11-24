@@ -1,35 +1,24 @@
 var editApp = angular.module('editApp', []);
 
-editApp.controller('editAppCtrl', function ($scope, getFileList, $http) {
-  
+editApp.controller('editAppCtrl', function ($scope, getFileList, $http, viewsFactory) {
+  viewsFactory.resetPSA();
   //show that textarea:
   $('.scrachPaper').removeClass('noShow');
 
   $scope.gData = getFileList.dataObj;
 
-  //$scope.gData.allStacks
-  // $scope.curStack = $scope.gData.allStacks;
-  
-
-
-  $scope.newCard = function(){
-    $scope.classObj = {
-      invisible : !$scope.classObj.invisible
-    };
-    console.log('in edit');
-  };
-
   $scope.globalData = getFileList.dataObj;
 
   $scope.sendFile = function(){
+    viewsFactory.resetPSA();
     getFileList.writeFile({
      fileName :  $scope.gData.curFileName,
      file : $('.entireStack').val()
    });
    
-  $scope.gData.curStackIndex = null;
-  $scope.gData.allStacks = getFileList.makeStack($scope.curStackStringified);
-
+    $scope.gData.curStackIndex = null;
+    $scope.gData.allStacks = getFileList.makeStack($scope.curStackStringified);
+    viewsFactory.showPSA('saved the world!');
   };//close sendFile
   //keep all stacks in one file in a form of array
   //when editing, should join all back into one file???
