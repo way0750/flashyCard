@@ -1,6 +1,6 @@
 var fileList = angular.module('fileList', []);
 
-fileList.controller('fileListCtrl', function ($scope, $http, getFileList, $location, viewsFactory) {
+fileList.controller('fileListCtrl', function ($scope, getFileList, $location, viewsFactory) {
   viewsFactory.resetPSA();
   //shouldn't show that note pad textarea:
   $('.scrachPaper').addClass('noShow');
@@ -19,7 +19,9 @@ fileList.controller('fileListCtrl', function ($scope, $http, getFileList, $locat
   //this function should do two things get file by $http save it in the client.curStack
   //to get file from server, and that is it.
   $scope.getFile = function(){
+    //get the file name from the select element
     getFileList.dataObj.curFileName = $scope.fileName;
+    //get the file from server
     getFileList.getFile($scope.fileName)
       .then(function(res){
         //once gets the text file from server
@@ -29,9 +31,6 @@ fileList.controller('fileListCtrl', function ($scope, $http, getFileList, $locat
       });
   };//close getFile
 
-  //first parseStacks to get an array of strings
-  //then make stacks
-
   $scope.chooseStack = function () {
     var stackIndex = $scope.gData.curStackIndex = $scope.stackName.match(/\d+/)[0]-1;
     var shuffledStack = getFileList.shuffle($scope.gData.allStacks[stackIndex]);
@@ -39,7 +38,4 @@ fileList.controller('fileListCtrl', function ($scope, $http, getFileList, $locat
     $scope.gData.curCardIndex = -1;
     $location.path( '/study' );
   };
-
-
-
 });
