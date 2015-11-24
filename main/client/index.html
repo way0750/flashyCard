@@ -12,6 +12,7 @@
 
   <script src="./lib/client.js"></script>
   <script src="./lib/factory.js"></script>
+  <script src="./lib/views.js"></script>
   <script src="./fileList/fileList.js"></script>
   <script src="./edit/edit.js"></script>
   <script src="./study/study.js"></script>
@@ -23,10 +24,11 @@
     <div class = 'main'>
     <h1>Flashy Card</h1>
     You are studying : 
-    <span ng-show = '!globalData.curStackName'>nothing!</span>
-    <span ng-show = 'globalData.curStackName'>{{globalData.curStackName}}</span>
+    <span ng-show = 'gData.curStackIndex === null'>nothing!</span>
+    <span ng-show = '!!gData.curFileName'>{{gData.allStacks[gData.curStackIndex].stackName + ' @ '}} {{gData.curFileName}}  
+    </span>
     <br>
-    <div ng-show="curStack===null">nothing has been selected</div>
+    <div class = 'announcement'></div>
     <br>
     <textarea class="scrachPaper"></textarea>
     <a ng-href='#/study'>study time !</a>

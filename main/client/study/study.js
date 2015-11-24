@@ -1,6 +1,6 @@
 var studyApp = angular.module('study', []);
 var ggg = {hey:90};
-studyApp.controller('studyCtrl', function ($scope, getFileList, $location) {
+studyApp.controller('studyCtrl', function ($scope, getFileList, $location, viewsFactory) {
 
   //show that textarea:
   $('.scrachPaper').removeClass('noShow');
@@ -26,8 +26,10 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location) {
       $scope.state = 0;
       $scope.progress = stack.length;
     }
+    viewsFactory.resetPSA(); 
   };
 
+  //immediately show one card when this view is rendered
   if ($scope.gData.shuffledStack){
     $scope.showOneCard();
   }
@@ -43,6 +45,7 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location) {
   };
 
   $scope.forgotCard = function () {
+    if (!$scope.gData.shuffledStack || $scope.gData.shuffledStack.length===0){return;}
     var lastStackIndex = $scope.gData.allStacks.length-1;
     var lastStack = $scope.gData.allStacks[lastStackIndex];
     if (/update/.test(lastStack.stackName)){
@@ -53,11 +56,14 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location) {
       newStack.stackName = '#update';
       $scope.gData.allStacks.push(newStack);
     }
+    viewsFactory.showPSA('added card');
   };
 
   $scope.deleteCard = function () {
     //splice current card by index from the allStack
-    if (!curStack || curStack.length===0){return;}
+    if (!$scope.gData.shuffledStack || $scope.gData.shuffledStack.length===0){return;}
+    var canPerform = viewsFactory.showPSA('deleted card');
+    
     var targetIndex = $scope.curCard.cardID;
     var stackIndex = $scope.gData.curStackIndex;
     var curStack = $scope.gData.allStacks[stackIndex];

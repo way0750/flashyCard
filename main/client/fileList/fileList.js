@@ -1,7 +1,7 @@
 var fileList = angular.module('fileList', []);
 
-fileList.controller('fileListCtrl', function ($scope, $http, getFileList, $location) {
-
+fileList.controller('fileListCtrl', function ($scope, $http, getFileList, $location, viewsFactory) {
+  viewsFactory.resetPSA();
   //shouldn't show that note pad textarea:
   $('.scrachPaper').addClass('noShow');
 
