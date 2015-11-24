@@ -46,6 +46,9 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location, views
 
   $scope.forgotCard = function () {
     if (!$scope.gData.shuffledStack || $scope.gData.shuffledStack.length===0){return;}
+    var canPerform = viewsFactory.showPSA('added card');
+    if (!canPerform){return;}
+    
     var lastStackIndex = $scope.gData.allStacks.length-1;
     var lastStack = $scope.gData.allStacks[lastStackIndex];
     if (/update/.test(lastStack.stackName)){
@@ -56,14 +59,13 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location, views
       newStack.stackName = '#update';
       $scope.gData.allStacks.push(newStack);
     }
-    viewsFactory.showPSA('added card');
   };
 
   $scope.deleteCard = function () {
     //splice current card by index from the allStack
     if (!$scope.gData.shuffledStack || $scope.gData.shuffledStack.length===0){return;}
     var canPerform = viewsFactory.showPSA('deleted card');
-    
+    if (!canPerform){return;}
     var targetIndex = $scope.curCard.cardID;
     var stackIndex = $scope.gData.curStackIndex;
     var curStack = $scope.gData.allStacks[stackIndex];
