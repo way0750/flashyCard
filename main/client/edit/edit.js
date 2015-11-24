@@ -18,29 +18,26 @@ editApp.controller('editAppCtrl', function ($scope, getFileList, $http) {
 
   $scope.globalData = getFileList.dataObj;
 
-  //$scope.sendFile = function(){
-  //  console.log('current stack name', $scope.gData.curStackName);
-  //  console.log('got this as content:', $scope.curStack);
-  //  getFileList.writeFile({
-  //    fileName :  $scope.gData.curStackName,
-  //    file : $scope.curStack
-  //  });
-  //};//close sendFile
-  
+  $scope.sendFile = function(){
+    getFileList.writeFile({
+     fileName :  $scope.gData.curFileName,
+     file : $('.entireStack').val()
+   });
+   
+  $scope.gData.curStackIndex = null;
+  $scope.gData.allStacks = getFileList.makeStack($scope.curStackStringified);
 
+  };//close sendFile
   //keep all stacks in one file in a form of array
   //when editing, should join all back into one file???
   //if yes then need to re-parse the whole file back to allStacks.
   
-  // $scope.gData.map(function (stack) {
-  //   var stackName = stack.stackName;
-  //   stack.map(function (QnAObj) {
-  //     return [QnAObj.question, QnAObj.answer].join('');
-  //   });
-  //   return stackName + '\n';
-  // });
+  $scope.curStackStringified = $scope.gData.allStacks.map(function (stack) {
+    var stackName = stack.stackName;
+    var stackStringified = stack.map(function (QnAObj) {
+      return [QnAObj.question, QnAObj.answer].join('\n\n');
+    }).join('\n\n');
+    return stackName + '\n\n\n\n' + stackStringified;
+  }).join('\n\n\n\n');
   
-  
-
-
 });

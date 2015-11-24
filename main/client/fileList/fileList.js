@@ -13,7 +13,6 @@ fileList.controller('fileListCtrl', function ($scope, $http, getFileList, $locat
   $scope.getFileList();
 
   //this function should do two things get file by $http save it in the client.curStack
-  //then 
   //to get file from server, and that is it.
   $scope.getFile = function(){
     getFileList.dataObj.curFileName = $scope.fileName;
@@ -21,26 +20,13 @@ fileList.controller('fileListCtrl', function ($scope, $http, getFileList, $locat
       .then(function(res){
         //once gets the text file from server
         //parse it into stacks and save them in the gData
-        $scope.gData.allStacks = getFileList.parseStacks(res.data);
-        //parse each array element into a stackObj;
-        $scope.gData.allStacks = $scope.gData.allStacks.map(function (stackStr, stackIndex) {
-          //assuming that the title of the stack would be breaking long!, it's a title!
-          var stackName = stackStr.match(/.+/)[0];
-          var QandA = stackStr.slice(stackName.length);
-          QandA = getFileList.makeQandA(QandA);
-          QandA.stackName = stackName;
-          QandA.stackIndex = stackIndex;
-          
-          return QandA;
-        });
+      $scope.gData.allStacks = getFileList.makeStack(res.data);
+
       });
   };//close getFile
 
-  //this should set     
-  //curStackIndex : 0,
-  //curFileName : null,
-  //shuffledStack : null,
-  //curCardIndex : -1,
+  //first parseStacks to get an array of strings
+  //then make stacks
 
   $scope.chooseStack = function () {
     var stackIndex = $scope.gData.curStackIndex = $scope.stackName.match(/\d+/)[0]-1;
@@ -50,6 +36,6 @@ fileList.controller('fileListCtrl', function ($scope, $http, getFileList, $locat
     $location.path( '/study' );
   };
 
-
+  
 
 });

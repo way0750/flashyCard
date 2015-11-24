@@ -40,8 +40,15 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location) {
 
   $scope.forgotCard = function () {
     var lastStackIndex = $scope.gData.allStacks.length-1;
-    $scope.gData.allStacks[lastStackIndex].push($scope.curCard);
-
+    var lastStack = $scope.gData.allStacks[lastStackIndex];
+    if (/update/.test(lastStack.stackName)){
+      lastStack.push($scope.curCard);
+    } else {
+      var newStack = [];
+      newStack.push($scope.curCard);
+      newStack.stackName = '#update';
+      $scope.gData.allStacks.push(newStack);
+    }
   };
 
   $scope.deleteCard = function () {
@@ -55,7 +62,14 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location) {
         curStack.splice(QnAIndex, 1);
       }
     });
+
+    if (curStack.length === 0 ){
+      $scope.gData.allStacks.forEach(function (stack, index) {
+        if (stack.stackName === curStack.stackName){
+          $scope.gData.allStacks.splice(index, 1);
+        }
+      });
+    }
   };
-  
 
 });
