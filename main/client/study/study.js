@@ -87,24 +87,27 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location, views
     if (!canPerform){return;}
 
     $scope.showGoToEdit = true;
+    var oldMeg = $scope.curCard.question;
+    var divLine = "---------------------------------";
+    $scope.curCard.question = '###'+divLine+'you sure you wanna deleted this?'+divLine+'\n'+ oldMeg; 
 
-    var targetIndex = $scope.curCard.cardID;
-    var stackIndex = $scope.gData.curStackIndex;
-    var curStack = $scope.gData.allStacks[stackIndex];
+    // var targetIndex = $scope.curCard.cardID;
+    // var stackIndex = $scope.gData.curStackIndex;
+    // var curStack = $scope.gData.allStacks[stackIndex];
 
-    curStack.forEach(function(QandAObj, QnAIndex) {
-      if (QandAObj.cardID === targetIndex){
-        curStack.splice(QnAIndex, 1);
-      }
-    });
+    // curStack.forEach(function(QandAObj, QnAIndex) {
+    //   if (QandAObj.cardID === targetIndex){
+    //     curStack.splice(QnAIndex, 1);
+    //   }
+    // });
 
-    if (curStack.length === 0 ){
-      $scope.gData.allStacks.forEach(function (stack, index) {
-        if (stack.stackName === curStack.stackName){
-          $scope.gData.allStacks.splice(index, 1);
-        }
-      });
-    }
+    // if (curStack.length === 0 ){
+    //   $scope.gData.allStacks.forEach(function (stack, index) {
+    //     if (stack.stackName === curStack.stackName){
+    //       $scope.gData.allStacks.splice(index, 1);
+    //     }
+    //   });
+    // }
   };
 
   $scope.editing = false;

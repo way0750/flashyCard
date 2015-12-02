@@ -37,6 +37,7 @@ flashy.factory('getFileList', function($http, $location){
       var question = card.match(/^#.+[\n\r]+/gm).join('');
       question = question.match(/^#.+/gm).join('\n');
       var answer = card.match(/^[^#\n].+/gm).join('\n');
+      // debugger;
       return {
         question : question,
           answer : answer,

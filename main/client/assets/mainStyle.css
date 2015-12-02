@@ -25,31 +25,33 @@ textarea {
   top: 0.7em;
   left: 35%;
   background-color: green;
-  /*display: none;*/
 }
 
 .testArea{
   float: left;
   width : 60%;
-  /*height: 30em;*/
-
 }
 
-
-.question, .question textarea{
-  width : 100%;
-  padding: 1em 0em;
-  background-color: aqua;
+.question, .question textarea, .answer, .answer textarea{
   display: block;
   white-space: pre-wrap;
+  padding: 1em;
+  width : 100%;
+}
+
+pre{
+  padding: 0px;
+  margin: 0px;
+}
+
+.question, .question textarea{
+  background-color: aqua;
 }
 
 .answer, .answer textarea {
-  width : 100%;
   background-color: yellow;
-  display: block;
-  white-space: pre-wrap;
 }
+
 code{
   white-space: pre-wrap;
   display: inline-block;
