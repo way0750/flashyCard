@@ -15,6 +15,7 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location, views
   
   $scope.showGoToEdit = false;
   $scope.showOneCard = function(){
+    var converter = new showdown.Converter();
     var stack = $scope.gData.shuffledStack;
     if (stack.length === 0){
       $scope.progress--;
@@ -22,6 +23,8 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location, views
         question : 'You Are Done! This Is The End (╯°□°）╯︵ ┻━┻) ',
         answer : 'You Are Done! This Is The End (╯°□°）╯︵ ┻━┻) '
       };
+      $('.question').html(converter.makeHtml($scope.curCard.question));
+      $('.answer').html(converter.makeHtml($scope.curCard.answer));
       if ($scope.showGoToEdit){
         viewsFactory.showPSA('save you changes!');
         $scope.gData.crossViewMessage = true;
@@ -33,7 +36,6 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location, views
       $scope.state = 0;
       $scope.progress = stack.length;
       viewsFactory.resetPSA(); 
-      var converter = new showdown.Converter();
       $('.question').empty();
       $('.answer').empty();
 
