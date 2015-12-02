@@ -35,5 +35,4 @@ editApp.controller('editAppCtrl', function ($scope, getFileList, $http, viewsFac
     }).join('\n\n');
     return stackName + '\n\n\n\n' + stackStringified;
   }).join('\n\n\n\n');
-  
 });
