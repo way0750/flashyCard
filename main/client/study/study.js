@@ -33,6 +33,12 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location, views
       $scope.state = 0;
       $scope.progress = stack.length;
       viewsFactory.resetPSA(); 
+      var converter = new showdown.Converter();
+      $('.question').empty();
+      $('.answer').empty();
+
+      $('.question').html(converter.makeHtml($scope.curCard.question));
+      $('.answer').html(converter.makeHtml($scope.curCard.answer));
     }
   };
 
