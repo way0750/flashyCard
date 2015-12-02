@@ -6,7 +6,7 @@
   <button ng-click="deleteCard()">delete this</button>
   <div class = 'testArea'>
     <div ng-show = "progress > -1">count down: {{progress}} more to go!</div>
-    <textarea class = 'question'> {{curCard.question}}</textarea>
-    <textarea class = 'answer' ng-show = "state != 0"> {{curCard.answer}} </textarea>
+    <div class = 'question'> {{curCard.question}}</div>
+    <div class = 'answer' ng-show = "state != 0"> {{curCard.answer}} </textarea>
   </div>
 </div>
