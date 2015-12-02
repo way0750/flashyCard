@@ -12,10 +12,18 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location, views
 
   //go through each card one by one, they have already been randomized.
   $scope.lastCardIndex = ($scope.gData.shuffledStack || []).length;
+
+  var renderCard = function(card){
+    $('.question').empty();
+    $('.answer').empty();
+
+    var converter = new showdown.Converter();
+    $('.question').html(converter.makeHtml(card.question));
+    $('.answer').html(converter.makeHtml(card.answer));
+  };
   
   $scope.showGoToEdit = false;
   $scope.showOneCard = function(){
-    var converter = new showdown.Converter();
     var stack = $scope.gData.shuffledStack;
     if (stack.length === 0){
       $scope.progress--;
@@ -23,8 +31,7 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location, views
         question : 'You Are Done! This Is The End (╯°□°）╯︵ ┻━┻) ',
         answer : 'You Are Done! This Is The End (╯°□°）╯︵ ┻━┻) '
       };
-      $('.question').html(converter.makeHtml($scope.curCard.question));
-      $('.answer').html(converter.makeHtml($scope.curCard.answer));
+      renderCard($scope.curCard);
       if ($scope.showGoToEdit){
         viewsFactory.showPSA('save you changes!');
         $scope.gData.crossViewMessage = true;
@@ -36,11 +43,8 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location, views
       $scope.state = 0;
       $scope.progress = stack.length;
       viewsFactory.resetPSA(); 
-      $('.question').empty();
-      $('.answer').empty();
-
-      $('.question').html(converter.makeHtml($scope.curCard.question));
-      $('.answer').html(converter.makeHtml($scope.curCard.answer));
+      renderCard($scope.curCard);
+      $scope.editing = false;
     }
   };
 
@@ -52,6 +56,7 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location, views
   $scope.restudy = function(){
     var curStackIndex = $scope.gData.curStackIndex;
     $scope.gData.shuffledStack = getFileList.shuffle($scope.gData.allStacks[curStackIndex]);
+    $scope.showOneCard(); 
   };
 
   $scope.showAnswer = function(){
@@ -99,6 +104,20 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location, views
           $scope.gData.allStacks.splice(index, 1);
         }
       });
+    }
+  };
+
+  $scope.editing = false;
+  $scope.editCurCard = function(){
+    if (!$scope.editing){
+      $('.question').html('<textarea>' + $scope.curCard.question + '</textarea>');
+      $('.answer').html('<textarea>' + $scope.curCard.answer + '</textarea>');
+      $scope.editing = true;
+      $scope.showGoToEdit = true;
+    } else {
+      $scope.curCard.question = $('.question textarea').val();
+      $scope.curCard.answer = $('.answer textarea').val();
+      renderCard($scope.curCard);
     }
   };
 
