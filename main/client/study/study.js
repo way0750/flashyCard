@@ -45,6 +45,7 @@ studyApp.controller('studyCtrl', function ($scope, getFileList, $location, views
       viewsFactory.resetPSA(); 
       renderCard($scope.curCard);
       $scope.editing = false;
+      $('.scrachPaper').focus();
     }
   };
 
