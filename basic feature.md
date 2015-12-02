@@ -40,24 +40,6 @@ the study view
 
 ​	have two windows side by side, one display the pre-recored answer, one allows user to write things down to compare.
 
-​	current Card view:
-
-​	one div for question:
-
-​	one div for answer:
-
-​	one div for note taking
-
-​	a button to show how much you know 0..5
-
-​	if less than 4 then add to review stack, which is the second half of the the file.
-
-​	first half: user cards
-
-////////////////////////////////////////////////////////
-
-​	second half: 'special attention'
-
 the editors view
 
 ​	when editing: click button or press comm + e to edit things

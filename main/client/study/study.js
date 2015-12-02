@@ -1,5 +1,5 @@
 var studyApp = angular.module('study', []);
-var ggg = {hey:90};
+
 studyApp.controller('studyCtrl', function ($scope, getFileList, $location, viewsFactory) {
 
   //show that textarea:
