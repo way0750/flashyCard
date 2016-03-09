@@ -1,0 +1,37 @@
+///////////////////general topics
+construction at least two ways
+	Range.new begin, end, exclusive=false
+	begin..end or begin...end(exclusive)
+includsive Vs exclusive
+	includsive: including the ending value
+	exclusive: nope, but when .last/max is called, the ending value is returned!
+Backward range
+	exists but not interatable
+	use methods like 100.downto(0){|index|} to interate backward
+		returns receiver, or enumerator if blockless
+		same as 100..0
+	or just use reverse
+
+comparision
+	.max and .last returns the last value inclusive or not
+	but .max err if exclusive and Float num ending
+	range===arg #same as range.include? arg
+	
+	
+defining beginning and end
+	both can be float numbers
+	but to be iteratorble the beginning must supprt .succ
+		and in acending order
+	backware ok only as object but not iteratorble.
+
+iteration
+	has to be acedent order to be iteratable
+	beginning has to be able to respond to .succ
+	range can't be exlusive and ending be floating if want to use .max
+		ok if only exlusive or only ending is float num
+
+difference between .include? and .cover?
+	.include?(arg), see if arg is with the numerical range
+		or if range isn't numerical, then see arg explicitly exist in the collection
+
+	.cover(arg) see if arg could exist according to the definition of the range numerical or not

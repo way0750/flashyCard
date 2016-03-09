@@ -1,0 +1,49 @@
+#General topics:
+###fact check
+	include?(item)
+	empty?
+	size, count{}
+###extract elements/index
+	index: index(item){opt block find item with block return true}
+	[]:[index] [range] [index, amount]
+	last(amount)/first(amount)
+	values_at(index, index, range)
+	select/!, reject/!{|item| true/false}
+	grep(obj=== item){opt as .map}
+
+#array editing:
+###adding
+	push(item list), unshift(item list), <<(1 item)
+	+ / concat, add to the end of receiver
+###deleting(by order/type/"random"/index/delete everything)
+	by order: pop(amount), shift(amount)
+	by type: compact(!), uniq(!)
+	"random": select!, reject! returns [with selected or remaning], nil if nothing get deleted
+	index: delete_at, slice!(works like [])
+	delete everything: clear.
+###changing values
+	[index]=
+	[index, amount]=
+	[range]=
+###structural change
+	flatten/!
+###order of elements
+	sort/!, shuffle/!, reverse/!
+
+#MISC:
+###com and con between first and take
+	everything is the samething except take(num) num is must
+	first is Array method, take is Enumerable method.
+###what is the return if a method take a number as argument(s)
+	return would be:
+		amount of items
+		item of that numerical index
+		
+###com and con between array and string objects
+	a lot alike, especially when comes to methods like: +, concat, 
+
+#inner working:
+###how to create an Array object? at least 3 ways
+	Array.new(amount, opt_obj_to_fill){either opt object or this: block return as Array item}
+	Array[] or []: literal constructor
+	%w{} or %W[]: split the string inside by space. if %W then interpolation works too

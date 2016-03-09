@@ -32,7 +32,7 @@ flashy.factory('getFileList', function($http, $location){
   //to make q and a
   var makeQandA = function(str){
     var stack = str.match(/(^#.*[\n\r]*)+(^[^#].*[\n\r]*)+/gm);
-    //seperate each card into an obj with q and a
+    //separate each card into an obj with q and a
     stack = stack.map(function(card, index){
       var question = card.match(/^#.+[\n\r]+/gm).join('');
       question = question.match(/^#.+/gm).join('\n');

@@ -1,0 +1,56 @@
+#identifiers:
+###name all 4 types of variabls, how to name them and how to access them
+	special beginning + any case letter or _ or numbers
+	global: $ + any case letter or _
+	instance: @ + any case letter or _
+	class: @@ + any case letter or _
+	local: lower case letter or _
+	
+###how to name and assigment constant, examples of constants.
+	Upcase letter + any case letter/_/nums...
+	ex: Enumerable, Array, etc...
+###what are keywords in relations to method, examples of keywords.
+	keywords are reserved words, and some are methods, such as rescue, do, end, begin, super, etc...
+#Variables Assignment
+###compare and contrast assigment and changing certain values of an object
+	assignment: same variables/constant, different object
+	changing value: same variables, same objects, different attributes
+###how to do single assigments two ways
+	a=obj
+	a=b=obj
+###how to do multiple assignments?
+	a,b,c=1,2,3
+	a, (b,c)=[1,[2,3]] # ( ) must mimic right side's sctucture
+###how to do "Boolean" assignment"?
+	a||= 90
+	a = true || false # a =  the return of the expression, if both are not true then first value.
+###what happend when you assign unique objects?
+	so he said that you are actually accessing to the actual object not its reference address
+
+#MIST ruby behaviors:
+###what is short cut evaluation? and how it's done?
+	first true/found first called/returned
+	ex: 12 || true, 12 is returned
+	if true then puts "great"
+	elsif true then puts "never get puts-ed"
+	end
+	# returns "great" even thought elsif is also true.
+	
+###"=" means what in all cases?, compare with the meaning of "=="
+	"=" always means assignment, even when is used as a method name (but value assiged to no body)
+	"==" or "===" always means comparision
+
+###the functions of *, when calling method with it, when defining a method with it, when used on some collection objects
+	* when used in method/proc construction to define argument rules: to capture and put all arguments into a array obj
+	* when used in other context: to break open this collection (array or hash.to_a) to into bare list
+###what are the Booleans objects
+	true, nil, false
+###meaning of ! / not when using with Boolean
+	! in boolean: not
+	! in method name: caution
+###how to do/the process of Boolean check between objects?
+	obj == obj
+	returns a Boolean obj, ex, true, then this true obj has True value
+	
+	first comparision, then returns a object which holds Boolean value
+	all object holds true value except false and nil

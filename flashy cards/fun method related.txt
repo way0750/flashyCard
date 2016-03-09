@@ -1,0 +1,111 @@
+#Defining method in general
+###naming rule of method
+	_ or any case letter THEN letters _ or number or !/+/?
+
+###parameter rules and order: the *, &, hash, default values and required values
+
+	* = only onw allowed, must be right side of alll default values
+		it captures all remining arguments into an array
+
+	& = must be at the very end, it captures the code block as a vanilla proc obj
+
+	hash object as argument = must be in {at all times}, but ok to ommit if at the end, but use ( ) if code block
+
+	default value = gets reassigned the second, after require parameter
+	
+###what kind of scoops can be nested in it?
+	another method definition
+	also no constant in it
+
+
+###what would be returned when: right after defining it and when calling it (how to determine).
+	after definition: nil
+	calling it: whatever it was created to return
+
+###Parameters VS arguments
+	parameters are just placeholder
+	arguments are the things you put in them
+
+###what kind of symbols can you use as method names? what you can't?
+	stick to ! = and ?
+	others might create problems
+
+###the !, what does it really mean in ruby?
+	in Boolean = not or switch the value around
+	in method name = caution! often it means changing object content
+
+#modifying or getting more methods:
+###name all 3 ways of getting more methods
+	define methods in parent or singleton class
+	parent class inherite methods from super class
+	mix in modules
+###how does inheritance work?
+	all super class methods and class variables get passed down(make upward accessible)
+
+###how can you get more methods from modules?
+	by mixing into the parent class: include/prepend(module)
+	
+	by mixing into the obj's singleton class
+
+###Defining/modifying methods: compare alias alias_method and super (what does each call?), how to use them?
+	alias new_name old_name
+	alias_method "new_name", "old_name"
+	create a copy of old_name method of new_name
+	old name meothod = whatever gets called when you write this alias
+
+
+	super(*arg=all that the method gets)
+	calls same name method from one scope higher.
+
+	def method arg
+	super
+	end
+	
+###Defining/modifying methods: what happens to method collection, when renaming an old method?
+	renaming = method_added
+###Defining/modifying methods: what happens when over writting a method many times?
+	only the latest/first found gets called
+
+#Calling a method:
+###argument rules: think assignment for require/default values and *parameters, & + code block, hash argument.
+	must aupply as least for the require values
+	*arguments = unbundle this collection obj into a bare list (hash gets converted first)
+	 &obj = call .to_proc on this obj and use the return proc as code block
+	hash argument = {must be in here} unless at the end of argument list
+###compare method look up and method execution and what about constant
+	look up: from singleton/prepend_module, included_module, parent_class/prepend_parent_module, all the way to Object class
+	if not found: method_missing
+
+	method execution: where it is found, where it is called, so beware of constant resolution
+###how does a method/message is called/send, and then how is method looked up? which version is called when many exist?
+	obj.method = method, as the message, is sent from right side of dot operator to left side.
+	first found first called
+	
+###how to resolve difference between same name local variables and method?
+	by using (), ex: .method()
+	variables don't carry ()
+
+###explicit and implicit call, how the call is done and when to do each?
+	implicit method call is done by sending method to default self
+	beaware of who is default self
+	
+	explicit obj.method
+###what methods to use to call methods regarless of its visibility
+	.send :method, arguments, &code_block
+
+#method visibility
+###types of visibilities and how to call methods in each
+	public: both explicit and implicit
+	private: only called implicitly unless method named with "=" sign
+	protected: explicit and implicit but must be called in scope where default self has the method, then same class obj can also call either ways
+###Rules to set visibility? ways and rules.
+	use class method: 
+	just use private/public/protected(the entire space below is set until explicitly change again)
+	or private/public/protected :methods....(method must already exist!)
+
+	each time close and open class visibility is set to public
+###the default visibility in class/module scoop, and on top scope general method, direct definition of singelton method
+	default visibility = public
+	top scope = private
+		all method defined here are any object's private method
+		but singleton is still self's singleton

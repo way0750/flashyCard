@@ -1,0 +1,20 @@
+///////////////////general topics:
+construction: at least 3 ways
+	1: return block return
+	Enumerator.new do |yielder_obj|
+		yielder_obj.yield any_item_here
+	end
+	
+	Enumerator::Lazy.new(collection) do |yielder, item|
+		yielder.yield item
+	end
+	
+	return: the method return
+	2: parasitic .to_enum(:method)
+	3: calling iterator without block (beware of any? all? none? and one?) 
+	
+inner working: yielding
+	with an yielding object, yielding to block on the fly
+	without creating an array first.
+method chaining
+	you are using Enumerator's instance methods, when you chain!

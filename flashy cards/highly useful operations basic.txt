@@ -1,0 +1,68 @@
+#To get the configuration setting:
+###what is the Constant for ruby configuration?
+	RbConfig::CONFIG
+###where is the configuration? file located?
+	sjdf \lib\ruby\2.0.0\i386-mingw32\rbconfig.rb
+###go check out some popular directories such as: bindir
+	you need something here
+#CMD commands tools
+###list four Ruby CMD tools
+	irb
+	ruby
+	gem
+	rakefile
+###how to get help for a Ruby CMD tool?
+	-h or --help
+
+#Control flow:
+###if statement: forms, if vs unless, undecleared variable, how to capture return
+	variable = if statement.......return
+	
+	unassigned variable within control flow: if false then var = 90 end
+		var still exist but assigned to nil
+
+	form: expression ? true_block : false_block
+		if expression then code elsif expression then code end
+		code_block if expression
+
+	unless statement is the same
+		
+	
+###case statement: forms, with or without testing a case, undecleared variable, how to capture return
+
+	undecleared variable assigned to nil like in if statement
+	
+	form:
+	var=case
+	when obj then
+	when obj then
+	end
+
+	var=case
+	when obj
+		code
+	when obj
+		code
+	end
+
+###looping with while and until: forms and new variables in condition and block: accessible in block and outside?
+	
+	form: code_to_run while/until expression
+	while/until
+	  code
+	end
+	
+	new variables are actually outer scope's local variables
+	
+###looping with code block: code block forms, controling loop with at least two keywords
+	loop do #this is a code block!
+	next(skip to next round)
+	redo(redo round)
+	break(break out of looping)
+	end
+	
+	
+###iteration: what is a Iterator? how is Iteration done?
+	iterator is a method that goes thought a collection object
+	iteration: by calling iterator to process collection obj one by one, sometimes yield to code block
+	examples of some keywords to control the code block/iteration.

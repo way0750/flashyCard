@@ -1,0 +1,49 @@
+#general topics:
+###construction: at least three ways
+	{key_obj => value_obj}
+	Hash.new(default return for non-existent keys)
+		or Hash.new{|hash, k| #what to do when non-existent keys are accessed. block return doesn't mean assignment!!! just simple return!}
+	Hash[even bare list of objs]
+		or Hash[array with 2-item-sub-arrays]
+
+###which construction method seems to assign value to non-existen key, but actually doesn't?
+	Hash.new(default return for non-existent keys)
+
+###which construction method can return something else when non-existen key accessed?
+	Hash.new{|hash, k| #what to do when non-existent keys are accessed. block return doesn't mean assignment!!! just simple return!}
+
+###what happens when non-existen key being accessed? 
+	nil or however the Hash.new is set up to return.
+
+#hash instance methods:
+###accessing key/values
+	hash[key_obj] #returns value
+	.values_at(key, key, key) #returns array of values at keys
+	
+	keys/values #return array of all keys/values
+
+###fact checks
+	.include?(obj)/.key?(obj) #key exist?
+	.value?(obj), value exist?
+
+	.size #amount of pairs
+	.empty? # true for empty
+
+###editing(change one value, to add new pair, to combine with other hash, to empty the hash, reverse between key value)
+	hash[key_obj]=new value
+	hash[new_key_obj]=value
+		#both returns new value
+
+	hash.merge/!(new hash){|key, v1, v2| #only overlapping one get sent here, return as new value}
+		no block then new hash's value to be kept
+		#=always return hash regarless of any changes
+	.update({hash}), same as .merge!
+		#= new hash
+	.invert
+		invert key and value, 	Conflicting keys take later value
+		#= new hash
+
+	.clear #=> {}
+		#change in place
+		#= {}
+	.replace #replace receiver's key value with new hash obj

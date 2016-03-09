@@ -1,0 +1,66 @@
+#enumerable:
+###extracting elements
+	take/drop(num) return certains amount or return reminaing after droping certain amount always in array
+	take_while: return part of the array that's true from very beginning til first false
+	drop_while return remaning array after dropping the very first item until the first true item
+ 
+	.find{firs true first return} or nil if nothing
+	.find_all/.select(Hash has its own), 
+		array has .select!
+		returns always [with true item if any]
+	reject{reject block true ones}
+	grep(arg===item)
+	
+###the .each method
+	returns receiver:
+	array: pass each item to block
+	hash: convert all pairs to [key, value] then pass them to block
+	range: has to be acedence order, pass each item until succ is invalid
+	string: 
+		char: an array with every single character
+		each_char: pass each character to block, return enumerator if not block
+
+	returns last line in enumerator's construction
+	enumerator: depends on how it has been constructed.
+###fact check
+	count #same as .size
+	count(item) #amount of items
+	count{amount of item block return true}
+
+	include?(must arg)
+	hash, array, range, string have their own version
+	
+
+	any? all? none? one?
+	default block: {|item| item}
+###comparision
+	all done by item's own <=>
+	sort #[array]
+	min/max #item
+	minmax #[min, max]
+
+	code block return obj as comparision proxy
+	all comparision by proxy item's own <=>
+	blockless return enumerator
+	sort_by
+	min_by/max_by
+	minmax_by
+
+###general iterator
+	all return enumerator if blockless, except inject
+
+	each_with_index #pass{|item, index|}
+	return receiver's .each return
+
+	each_cones(num) and each_slice(num)
+	returns nil, enumerator if blockless
+	
+	inject: err if blockless
+	map: 
+
+	cycle: returns nil if cycling done without err
+	block flow controllable by, redo, next, break
+###grouping
+	group_by{|item| block return be key, item be value}
+	partition{|item| true or false}
+	return [[all trues], [all falses]]

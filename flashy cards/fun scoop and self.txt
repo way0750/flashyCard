@@ -1,0 +1,34 @@
+#Scoop:
+###what counts as a scoop or what are some common examples of a scoop
+	a named space with restrict confinment for whatever is in it
+	classes such as Array, String
+	Module such as Kernel
+	another file
+	
+###what are the unique things in every scoop?
+	default self which mean also instance/class variables
+	local variables
+	
+###compare and contrast top leave scope and class Object
+	think of top leavel scope as the class definition body of the Object
+	except default self is different, instance variable is different
+
+###how to resolve constant? 3 ways. how to resolve One::Two::Three and the meaning of ::
+	:: is the scope resolution operator
+
+	with absolute path:
+		with :: : search in that specific scope and all of its ancestors all the way to BasicObject
+		note: modules have less ancestors
+		
+		with .const_get constSym
+		same as ::, but enable modules to search of all class's common ancestors: Object, Kernel, BasicObject
+
+	without absolute path:
+		puts M
+		start right from the scope where const is called then straight out til top level(Object, then all the common ancestors)
+
+###how to access class/moduel method beside using the dot operator?
+	Class::class_method
+###how does code block work in relation to scope? scope and variables.
+	code block is a scope but it gets access to all outer scope variables and default self
+	however, whatever assigned within code block, stuck in it, can't be access to outer scope.

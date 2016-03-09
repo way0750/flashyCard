@@ -1,0 +1,79 @@
+///////////////////general topics:
+constructions at least two ways
+	literal: //
+	Regexp.new "string"
+
+all special symbols/characters
+
+	. = any characater, stop matching when runs into a \n
+	! as in (?!) or (?<!) = not
+	# = interpolation
+	$ = the end of line
+	^ as in [^] = exclusion of character class
+	* = zero or more character
+	() as in (abc) = sub string capture
+	+ = one or more character
+	\ = \1 exact sub string, \n escape sequence
+	[] = character
+	{min, max} = quantifier
+	? = zero or one
+	// = Regexp literal
+
+matching zero width character
+	/(?=\d)/ matching that zero width thing before (?=\d)
+	
+global variable for whole match and captures
+	$& = entire match
+	$number = sun string cpature
+
+matching more than one characters
+	[ ] or [^ ]
+
+quantifier, especially how to set limits on amount of repetition on sub string capture?
+	?, + * {min, max}
+	set limit on sub string capture: (sub)+? = repeat once altenitively: (sub){quantier}
+
+anchor! how actually make them(espcially look behind!) and the inner ( ) consume or not! and is the anchor match part of the whole pattern match?
+	look ahead: (?=) or (?!)
+	look behide: (?<=) or (?<!) must specify amount if amount matters
+	sub string within isn't consumed, but matters
+
+modifier
+	x=space in Regexp obj doesn't matter
+	i=case insensitive
+	m=multiple lines match
+
+	note for m and the . : 
+	Without m,:
+		. Start matching operation at a new line(skipping any amount of \n first). Then stop at the first \n
+	With m:
+		. Starts at the beginning of string and ends at the end of string.
+	That's why . Matches \n character if m is on.
+besides string objects, whatelse can you match?
+	symbols
+	but sym.match // returns index
+///////////////////some methods:
+method: .match how arguments does it take and their functions?
+	.match pattern, start_pos=0
+	start_pos = starting position of the string for matching
+	returns a match obj
+
+MatchData obj methods: output captures
+	.captures: returns only captures
+	.to_a: returns all matching, index0=whole match
+	.[] accessing without to_a
+	.begin(capture num) #returns index of the capture
+	.end(capture num) #returns index of the capture
+	.string = cope of the original string
+
+string operations
+	.scan "str" or // {opt block} works as .each then return receiver
+	returns array of matches of "str" or //
+
+	.split "str" or //, total_amount_objs
+	returns array of a string divided if there is matching
+	
+	sub/!(// or "", '\1' or hash_return){return as subsitute}
+	gsub/! same argument as sub, not replacement or {} then enumerator
+
+	returns nil if use ! and no match.

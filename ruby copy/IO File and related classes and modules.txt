@@ -1,0 +1,161 @@
+///////////////////inner working of IO and File
+how does Ruby deal with external file data?
+	objectifying them just si you can interact with them like a regular Ruby object. All complicated stuffs are handled by Ruby behide the sence!
+what are the default streams for input, output, and Error output? total 6
+
+	STDIN/$stdin to receive input to Ruby
+	STDOUT/$stdout	to output to monitor/file/other destinations
+	STDERR/$stderr to output errors to monitor/file/other destinations
+
+	STD is a backback
+	$std is ones that are activly getting used by Ruby.
+	
+
+what are the relationship between global standard data stream and Kernel methods such as gets, puts, and print, etc...
+	all of those Kernel methods in/output data to global standard data stream: the $std....
+	
+what are the included modules? and what is the implications?
+	Enumerable is included in IO
+	which passes line(defined by $/) to block
+	
+what does $/ do?
+	it is the global string sperator which defines where is the end of a line, default ="\n"
+relationship between IO and File
+	File<IO
+	which is why File inherited so many methods from IO
+what is internal pointer, and its functions and compare it to casset tape
+	it points at where the current byte is ready to be read
+	it by default move forward, but .rewind can bring it back to 0
+	like a casset tape
+how to initialize a File object by File class methods(2) and Kernel method
+	File.new(file_path, mode)
+	File.open(file_path, mode)
+		if code block then pass the file obj to it, and close file stream when code block is done
+
+	Kernel open, same as the File.open
+
+how to delete a file by File class method
+	File.delete/unlink(*[file, file, file])
+	list must be bare list!!!!
+	returns amount of deletation
+
+	for fun: Dir.rmdir "oneDir", returns 0
+	FileUtils.rm_rf "files_dirs", return [what got deleted]
+
+how to create a file/directory path witha bunch of string
+	path = File.join list of nameStr (bare list or not=ok)
+file/directory path: compare ".." and "."; how to create a directory/file path
+	"."=current directory
+	".." go up one level or parent directory
+	extension: must be include if file!!!!
+		no directory share same name with file without extension.
+
+	"directory/forward/slash/etc..."
+
+///////////////////IO/File instance methods:
+how does .each work in this case?
+	file_obj.each("delimiterStr=$/") #pass each line to block as defined by the $/
+	
+compare and contrast ways to read from a file stream: 4 instance and 2 class, what heppens if end of file
+	instance methods:
+	read: whole thing as one string, nil if end of file
+	gets(delimiter=$/): gets one line, nil if end of file
+	readline(delimiter=$/): gets one line, err if end of file
+	readlines(delimiter=$/): return an array of lines, [] if end of file
+
+	class:
+	File.read(path): same as instance, no end of file worry, why?
+	file.readlines(path, delimiter=$/): same as instance, no end of file worry, why?
+	
+compare and contrast ways to write to file stream: 3 ways
+	print print to file continuesly, return nil
+	puts(arg, arg...) same as print but add "\n" at end of each arg, return nil
+	write return amount of characters
+
+managing the internal pointer, 4 methods: how to use them?
+	file_obj
+	.pos which byte is pointing at right now?
+	.pos= set to specified byte
+	.rewind=back to 0
+
+	.seek(amount, default=IO::SEEK_SET), same as pos=
+	.seek(amount, IO::SEEK_CUR), move pos to +- amount from current pos
+	.seek(amount, IO::SEEK_END), move pos to +- amount from end pos
+
+///////////////////inner working of File:Stat
+how to create File:Stat objects at least 3 ways?
+	File::Stat.new "path"
+	file_obj.stat
+	File.stat "path"
+when File:Stat object created, what kinda info are saved and do they reflect changes in file?
+	once created, Stat obj keep property info about directory/file of the path specified
+	not live updatable
+
+///////////////////fact check common among methods between File, FileTest, File_Stat
+compare the way calling these methods between File/FileTest and File::Stat
+	File/FileTest::method("path")
+	File::Stat.new("path").method because the path is included already!
+to check if file even exist, if it is a directory, if it is a regular file.
+	.file?
+	.exist? #only available to File/FileTest
+	.directory?
+to check if the file read/write/executable by current user or by anyone
+	.readable/writable?/executable?
+	.world_readable?, etc...
+checking the size of file, 3 ways!
+	.size return 0 or size
+	.zero? return true for empty
+
+	.size? #return size or nil
+	
+
+///////////////////inner working of Dir class
+what does it do and how to initialize its object? live updatable?
+	Dir.new "path"
+	not live updatable
+
+include modules? which means.....
+	Enumerable, which means there is .each for instance
+	.each pass each entry to block
+to get a list of all directories and files in given path: 2 class(how to create pattern in one of them), 1 instance method
+	Dir.entries "path" returns all entries including hidden ones
+	Dir.glob "pattenStr" Dir[patternStr] only search pwd
+	
+	patternStr rule:
+	"abc" = match exact
+	* = any charactar or any length
+	? = . in regexp 
+	[] = the same as regexp one
+
+	instance method: .entries same as Dir.entries "."
+
+to get current workig directory and/or get an Dir object's assigned path
+	.path returns whatever path you entered
+
+///////////////////inner working of FileUtils module
+before you can use it, you need to.....
+	require "fileutils"
+how to copy files not directory! over-writting rule is???
+	FileUtils.cp file or files, re_named or over write File or dir_if_files
+	returns nil if src
+	returns [src array] if src array
+
+///////////////////common method between Dir and FileUtils:
+to check current working directory
+	Dir or Fileutils class method .pwd # return "string path"
+
+compare and contrast Dir and FileUtils: making a new directory
+	Dir.mkdir nameStr
+		returns 0 as truely created, false = err
+	FileUtils.mkdir nameStr or [nameStr, nameStr]
+		true always returns [nameStr, nameStr]
+		if already existed, then err
+	
+compare and contrast Dir and FileUtils: removing a directory/file
+	Dir.rmdir nameStr 
+		# can only remove dir not file!!!!!!!!
+		returns 0 as truely deleted, false = err
+
+	FileUtils.rm_rf nameStr or [nameStr, nameStr]
+		# can delete both dir and file
+		true or not always array: [nameStr, nameStr]

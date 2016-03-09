@@ -1,0 +1,31 @@
+///////////////////how to change the core safely:
+what are the potential risks of changing the core libraries
+	everything si interconnected so changes here will affect things somewhere else
+	other people might depend on the core, changing the core, might break their code
+
+what the some low risk ways to change core behaviors/libraries(name at least 4 ways)
+	change individual object(singleton method)
+	if have to change to a class, write new method with names that might not over lapp with other people's code
+	if have to change same method, do pass throught and keep the interface and return behaviors
+	if have to change same method, set special trigger in argument to trigger special behavior and returns
+	
+	or just inherite from a class and change all you want, best one is BasicObject:
+	there aren't many methods to get confused with. it is a new blank piece of paper, no same name conflits, it's a new and simple class
+	But it doesn't include Kernel module
+	
+///////////////////how to: customizing an individual object:
+how to customize an object: by going thorugh the singelton class
+	class << obj
+		define instance singleton method here
+		beware of constance resolution
+	end
+how to: by performing changes right on the object
+	def obj.method
+	beware of constance resolution
+	end
+
+///////////////////what are some ways to use a module:
+if certain methods appear over and over again, how would you use module to aviod writing same code over and over?
+	module to the rescue!
+how does Enumerable module work?
+	when it is mixed into a class, its instance methods will call target class's .each instance method

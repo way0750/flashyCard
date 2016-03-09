@@ -1,0 +1,63 @@
+#code block
+###code block VS while/until/for var in... who create scopes?
+	code block creates scope but with special features(local variables and default self are from outer scope)
+	
+	while/until/for var in are control flow which don't create scope
+	
+###code blocks relations to outer scoop in general.
+	outer scope's default self and local variables are accessible in code block
+	all variables decleared in code block aren't accessible to outer scope
+
+###code block and variables accessiblity : local/block/instance/class/global variables, how do they work?
+	local/block are accessible in the scope where theyr are assigned
+	instance/class are only accessible depends on default of the scope
+	global: everywhere!
+	
+
+###code block and class/instance_eval, in terms of self and instance/class variables
+	the default self in those code block are the receiver, so their instance and class variables are accessible
+
+#Proc: vanilla and lambda in relation to method
+###how create a vanilla Proc object, 3 ways; how to for lambda in two ways
+	Proc: Proc.new{|arg| }, proc{|arg| }, def method &codeBlock
+
+	lambda: ->(arg){}, lambda {|arg| }
+
+###how does & work? in method definition and when calling method with it.
+	in method definition: &var means to capture a code block and save it to var
+	
+	when calling method with &: &obj: calls obj.to_proc and use return proc obj as code block 
+
+###compare and contrast proc vanillar, lambda and method in terms of: construction, scope during construction, handling of "return"
+	
+	construction: proc/lambda {|arg(same rule as method args)|}; method: def method arg; end
+
+	scope during contruction: proc/lambda same as regular code block; method: completely sealed up scope.
+
+	handling of "return": proc can't handel it and hands it to outer scope(should be method), but lambda can handle it like method.
+
+###compare and contrast proc vanillar, lambda and method in terms of: argument rules, * and &, parameter assignment
+	argument rules: proc: quantity mis-matching is ok, lambda/method: nope!
+		if Hash object: must place in { } unless appear at the end of parameter list
+	* : same thing, to capture obj and out them into array
+		* must be put right side of all default value parameters
+	&: capture code block
+	
+###compare and contrast proc vanillar, lambda and method in terms of: calling them, yielding
+	call: proc/lambda.call(arguments)
+	
+	yielding: method: yield 
+		proc/lambda: first capture a code block with & in construction, then block.yield
+
+#Sample application of Proc objects:
+###creating and storing Proc objects: how to create proc objects, store and retrive them? 2 ways, think class Symbol
+	define to_proc for class of objects or as singleton method for specific object
+	to retrive: call &:symbol or &object_with_to_proc
+
+###how to supply a code block to method call with symbol?
+	
+	method &:symbol
+	
+###what is the process of supplying a code block to a method call by symbol object?
+	
+	calls to_proc of the symbol which are always: {|arg(1)| arg.send :sameSym}

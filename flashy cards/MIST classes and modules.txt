@@ -1,0 +1,98 @@
+#Exception
+###relationship between Exception and other errors, and how to create new Errors?
+	all Errors are sub classes of Exception, so to create a new error, just sub class any of them/Exception
+###how to create a error(not the class. And what actualy get created?), capture and manage errors(think all the keys words, and one method)
+	each error, when raised, is actually an instance of their parent class.
+	to cause error other than accidentlly, you need to specify an scope with the begin and end keywords, but if in method, they can be ommoited
+		use raise to cause error
+	to manage: to capture, use rescue, to specify which error to capture: rescue Error, to assign variabel to that error: rescue => var. 
+	to make sure certain thing is always done: ensure
+###instance methods for check error messages
+	to show message: use .message/to_s
+###instance method for tracing errores.
+	use .backtrace
+	return same as caller, index0 = where error is found
+
+#Thread
+###inner working: creating a new thread, and how do thread run with each other?
+	Thread.new{block block}
+	new Thread starts to run immeditely within the Thread it was created in
+	and return Thread object's system name with statues
+	if outer Thread gets terminated, it gets same treatment.
+	
+###inner working: global variables and thread specific hash
+	global variables are the same, except:
+		Regexp related variables and "Hash values"
+
+###operation: fact check the state of main/current thread?
+	Thread class method .main for main, .current for current thread
+	return respective Thread object with states
+
+###operation: controling the flow of the thread and the return + status of those control
+
+	control within the Thread:
+		.stop, exit, kill(Thread object)
+		status: "dead"; system: dead
+
+		sleep: "sleep"; system: sleep
+		raise and unhandle error: status: nil; system: dead
+
+	control externally
+		.stop, exit, terminate
+		status: "dead"; system: dead
+
+		.run
+		status: "run"; system: run
+
+###operation: how to force outer thread to wait for inner thread?
+	use instance method .join(time out in seconds) in a Thread which you want to force pause and wait.
+	
+
+#the Method/UnboundMethod class
+###compare and contrast Method/UnboundMethod and Enumerator class.
+	where it is created, where it is ran, so be aware of local variables and Constance
+###methods: to create a method object 2 ways
+	both return object binded with a object and its method
+	obj.method(:meth)
+	unbinded_method_obj.bind(obj)
+###methods: to create a UnboundMethod object 2 ways
+	both return a unbined general method object
+	Class method: .instance_method(:method)
+	Method object method .unbind
+#The comparable module
+###the requirement to mix it in (think Enumerator's .each)?
+	must define .<=>(arg) to return -1,0,1 to define small equal and large
+	then all comparable methods calls this method for comparision
+###list all 6 instance methods
+	<
+	>
+	==
+	>=
+	<=
+	.between? obj, obj (same as .cover for Range obj)
+
+#Symbols
+###inner working: how to manually create and what get auto created?
+	manually create by : + same rule as global variable naming
+	
+	auto creation when:
+		naming constances, all variables(with their special symbol beginning), methods
+	
+###inner working: similarity between integer and symbol VS String. two same name symbols, who gets kept?
+	similarity: inmutable, you can;t change these objects, "and variables keeps the object itself instead of a reference"
+	only oner version gets kept if "overlap"	
+###String and symbol conversion: 4 ways at least
+	to string: "#{sym}" and sym.to_s
+	to symbol: str.to_sym and :str
+###how to get a list of all symbols currently in ruby?
+	Symbol class method .all_symbols. But be careful!!!!
+###application: how to use use symbol obj like string obj
+	sym methods like str ones: 
+		[], match(return index of first match)
+		all the case switching methods
+		all size method: empty? size
+		all rotation method: .succ .next
+		
+###application: how to use symbols as hash key, method arguments?
+		hash key: {hey: 1234}
+		method argument:  inject(:meth), map(&:upcase)

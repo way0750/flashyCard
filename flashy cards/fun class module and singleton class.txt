@@ -1,0 +1,62 @@
+#common facts:
+###Most Common super classes, how are they common?
+	Object, Module, BasicObject
+	Object: all instance in Ruby is an instance of Object
+	Module: it's the super class of Class, and all modules
+	BasicObject: the very last one in the ancestors chain
+
+###Most Common ancestors, how are they common?
+	[Object, Kernel, BasicObject]
+	because Object is inherited by all classes by default, so....
+###examples of some common classes.
+	Array, String, Hash, Integer, TrueClass, NilClass, FalseClass
+
+###Everything is an Object, what does that mean? super class/class/methods....
+	every instance whose parent class inherited Object
+
+#creating objects:
+###how to define a class/singleton class, and what happens when you are done with the def body?
+	class NameConst
+	end
+
+	class << obj
+	end
+
+	the entire definition body runs once right after defining them, and return the last line of code
+
+###what is the common process of creating an object? (what method will be called usually)
+	call Class::new
+	which will call instance's initialize method
+
+###what are some examples or literal constructions?
+	""
+	//
+	{}
+	[]
+	1,2,3,4
+	:hey
+	
+	
+#compare and contrast: class/singleton class and module
+###in terms of new object creation
+	class: create objects by .new or literial
+	singleton class gets created along with the instance
+
+	modules can't create objects
+	
+
+###in terms of ways to access them, and their def scoop/body
+	class: class NAME; end
+	singleton: class << NAME; end
+	module: module NAME;end
+
+	or class/singleton.module.class_eval{default self = receiver}
+
+###in terms of accessibility or sharability of their different types of data and methods.
+	class: data and methods sharable with its instance and sub classes and their instances
+	singleton: instance's data and methods only accessible to its only instance
+		but singleton class variables gets tranfered to regular class
+	
+	module: instance data and methods are accessible to whatever class/object mixes it in.
+
+	remember undecleared instance variabls actually returns nil

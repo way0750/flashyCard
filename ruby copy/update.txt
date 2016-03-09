@@ -1,0 +1,170 @@
+///////////////////IO related:
+Dir and FileUtils: deleting and making files/directories, what are each's class methods and their return.
+	Dir::rmdir "one empty dir" return 0 or err if not directory found
+	make sure the dir is empty!! or err
+	FileUtils::rm_rf "one dir/file" or [many dir_file_Str] always return [dir_or_file]
+
+	Dir::mkdir "one dir" return 0 or err is already exist
+	FileUtils::mkdir one dir" or [many dirStr] return [dirs] or make as many til err for same name directory.
+
+FileUtils' copy method, and two types of return?
+	FileUtils.cp "file" or ["file"], new_name or destination
+	if one file: return nil
+	if many files: return [files.....]
+
+Dir.glob(pattern) how to make a string pattern for this method?
+	"abc" exact match
+	"?" any one character like . in regexp
+	"[abc]" same as /[abc]/
+	"*" any character of any amount
+
+///////////////////Hash related
+editing(change one value, to add new pair, to combine with other hash, to empty the hash, reverse between key value)
+	hash[key_obj]=new value
+	hash[new_key_obj]=value
+		#both returns new value
+
+	hash.merge/!(new hash){|key, v1, v2| #only overlapping one get sent here, return as new value}
+		no block then new hash's value to be kept
+		#=always return hash regarless of any changes
+	.update({hash}), same as .merge!
+		#= new hash
+	.invert
+		invert key and value, 	Conflicting keys take later value
+		#= new hash
+
+	.clear #=> {}
+		#change in place
+		#= {}
+	.replace #replace receiver's key value with new hash obj
+construction: at least three ways
+	{key_obj => value_obj}
+	Hash.new(default return for non-existent keys)
+		or Hash.new{|hash, k| #what to do when non-existent keys are accessed. block return doesn't mean assignment!!! just simple return!}
+	Hash[even bare list of objs]
+		or Hash[array with 2-item-sub-arrays]
+
+///////////////////Enumerator
+how to make a lazy Enumerator obj?
+	Enumerator::Lazy.new(collection){|yielder, item|} #= nil
+	collection_obj.lazy #= lazy enumerator object
+
+///////////////////String instance methods:
+fact checks
+	str.include? "str" or str=~/pattern/
+	.size or .length
+	empty?
+	start_with?/end_with?("str", "str"), etc...
+	.index(pattern/str, opt_begin_index), rindex start from right(no reversing)
+editing: adding
+	str+str #= third str
+	str.concat str like + but change in place
+editing: modify value/sub string
+	str[/pattern/] or str[index, range, begin-end]=replace or add string
+	sub/gsub/!(/pat/ or str, hash_return or replacement){|captureStr|opt, block return as replacement}
+editing: delete(by position or type):
+	delete space: lstrip/!, rstrip/!, strip/!
+	chop/! delete one character from end or "\r\n".
+	chomp/! delete one \n or \r from end or "\r\n".
+editing: change characters arrangement
+	.reverse
+
+///////////////////Array related
+methods to delete nil or repetitive objects and their return!
+	.compact/!
+	.uniq/!
+	return third array
+	nil if nothing deleted.
+delete item by index: 2 of them! and their arguments?!!
+	delete_at
+	.slice!()
+comparing with string: [1,0]=obj what is the meaning of 0 in this case?
+	zero length character in string
+	somewhere the same for Array
+	both means the position between index 0 and 1
+///////////////////symbols
+how to name symbols:
+	same as global variables replace $ with :
+	however for more flexbility: :"anything anyway you want"
+application: how to use use symbol obj like string obj
+	sym methods like str ones: 
+		[], match(return index of first match)
+		all the case switching methods
+		all size method: empty? size
+		all rotation method: .succ .next
+///////////////////Exception
+how to trace error? what does index 0 mean?
+	.backtrace
+	index0 same as caller(0) = where the error is actually found, not where it is first initialize(where it all began from top)
+///////////////////Thread
+operation: controling the flow of the thread and the return + status of those control
+
+	control within the Thread:
+		exit, kill(Thread object)
+		status: "dead"; system: dead
+
+		.stop: pause Thread, system and status: "sleep"
+
+		.sleep: Thread sleeps a bit then run
+
+		raise and unhandle error: status: nil; system: dead
+
+	control externally
+		.kill, exit, terminate
+		status: false; system: dead
+
+		.run/wakeup
+		status: "run"; system: run
+///////////////////The comparable module
+so .between is same as?????
+///////////////////enumerable:
+extracting elements
+	take/drop(num) return certains amount or return reminaing after droping certain amount always in array
+	take_while: return part of the array that's true from very beginning til first false
+	drop_while return remaning array after dropping the very first item until the first true item
+ 
+	.find{firs true first return} or nil if nothing
+	.find_all/.select(Hash has its own), 
+		array has .select!
+		returns always [with true item if any]
+	reject{reject block true ones}
+	grep(arg===item)
+///////////////////general topics:
+modifier
+	x=space in Regexp obj doesn't matter
+	i=case insensitive
+	m=multiple lines match
+
+	note for m and the . : 
+	Without m,:
+		. Start matching operation at a new line(skipping any amount of \n first). Then stop at the first \n
+	With m:
+		. Starts at the beginning of string and ends at the end of string.
+	That's why . Matches \n character if m is on.
+besides string objects, whatelse can you match?
+	symbols
+	but sym.match // returns index
+quantifier, especially how to set limits on amount of repetition on sub string capture?
+	?, + * {min, max}
+	set limit on sub string capture: (sub)+? = repeat once altenitively: (sub){quantier}
+method: .match how to use it?
+	.match pattern, start_pos=0
+	start_pos = starting position of the string for matching
+	returns a match obj
+MatchData obj methods. all the little methods
+	.captures: returns only captures
+	.to_a: returns all matching, index0=whole match
+	.[] accessing without to_a
+	.begin(capture num) #returns index of the capture
+	.end(capture num) #returns index of the capture
+	.string = cope of the original string
+
+///////////////////compare and contrast: class/singleton class and module
+in terms of accessibility or sharability of their different types of data and methods.
+	class: data and methods sharable with its instance and sub classes and their instances
+	singleton: instance's data and methods only accessible to its only instance
+		but singleton class variables gets tranfered to regular class
+	
+	module: instance data and methods are accessible to whatever class/object mixes it in.
+
+	remember undecleared instance variabls actually returns nil

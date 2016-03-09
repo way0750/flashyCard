@@ -1,0 +1,54 @@
+#Inner working:
+###constructions(at least 3 ways to do so)
+	<<HERE_DOC	
+	   sdhfahsdfjh	
+	HERE_DOC
+	
+	"cksjdfsgdf"
+	'df,gsdjkf' everything special will be auto escapted
+	'\n' = returns to "\\n"
+
+	%Q{interpolaion works}
+	%q{interpolation doesn't work}
+
+	String.new "uesless"
+	
+###interpolation
+	#{return the return of last bit of code and call to_s on it}
+###ordinal value
+	numerical value of each character
+	"a".ord = 97
+###special characters \n \t #{}
+	\n = new line
+	\t = tap space
+	#{} = interpolation: call to_s on the last bit of code in the { }
+###letter cycling
+	"z".succ = "aa"
+	"Z".succ = "AA"
+	"Zz".succ="Aa" keep the letter case
+###usage of $/
+	global seperator to define string line
+	gets($/="\n")
+
+#String instance methods:
+###access to characters or sub strings
+	str[index] str[begin, total] str[range]
+	str[/pattern/, capture_num], str["sub-str"]
+###fact checks
+	str.include? "str" or str=~/pattern/
+	.size or .length
+	empty?
+	start_with?/end_with?("str", "str"), etc...
+	.index(pattern/str, opt_begin_index), rindex start from right(no reversing)
+###editing: adding
+	add: str+str #= third str
+		str.concat str like + but change in place
+###editing: modify
+	str[/pattern/] or str[index, range, begin-end]=replace or add string
+	sub/gsub/!(/pat/ or str, hash_return or replacement){|captureStr|opt, block return as replacement}
+###editing: delete(by position or type):
+	delete space: lstrip/!, rstrip/!, strip/!
+	chop/! delete one character from end or "\r\n".
+	chomp/! delete one \n or \r from end or "\r\n".
+###editing: change characters arrangement
+	.reverse

@@ -1,0 +1,110 @@
+///////////////////The eval family of methods
+all of these eval methods, what is the scoop and self when called with string or code block?
+	the receiver is the default self
+	the scope is like the regular code block, can access outer scope/default self's variables(except class var)
+how to use these methods: eval and instance/class_eval
+	eval(str as code)
+	instance_eval for all objs, pass receiver as default self to code block
+	same for class_eval but only for class objects 
+compare .instance_eval and .instance_exec
+	.instance_exec(obj)# get an obj as argument and pass it to code block
+method to define method
+	class::define_method(methName, codeblock){opt code block}
+what is attr_accessor and how to use it, specifically what is its limit?
+	a class method which turns instances' instance variables into method names, ex: @hey: hey and hey=
+	limit: the methods are very limited in function: only set and get variables' values.
+what is define_method and how to use it, specifically how to manage its arguments?
+	class method to define instance methods
+	define_method(instance_method_name_str_sym, code_block_proc)
+
+///////////////////Methods for Fact checks
+instant and class/module methods to show collections(3 types) of avaiable methods
+	instance: method show both public and protected methods
+		private.protected_method show respective method
+		false to show singelton methods
+
+	class: private/protected_instance_method #show respective methods
+		instance_method #show both public and protected
+		false to show ones defined in class
+
+instant method to check if an object respond to certain method, in relation to method_missing and MethodClass
+	.respond_to?(:method)
+	.respond_to_missing?(:method) if return true then can make method object for specific indentifier
+how to check data for a given object/scoop?
+	.local_variables
+	.global_veriables
+	.instance_variables
+how to check an object's creator/super/singleton class, super class, scoops in the method look up path, and its id
+	creator: .class
+	super: .superclass
+	scopes in method searching path: class method .ancestors
+	id: object_id
+
+///////////////////Traces of execution
+name the method and how to call it.
+	.caller(num=1, length) or (range) num = index of array of traces
+what does each array element contain?
+	"absolute path with file name, line num of code, method"
+what is the order of each array elelement?
+	index0 = that method actually directly called a certain thing
+	index -1 = the initial call
+
+///////////////////Auto call and conversion methods
+which ones return strings? and when are they auto called?
+	to_s, to_str
+
+	when auto called: 
+	to_s: puts, "#{}"
+	to_str: string instance methods require string argument to modify receiver's content, ex: +/concat
+which ones return a number?
+	to_i, to_f
+	no auto call?
+which ones return an array, and when are they auto called?
+	to_a, to_arr
+	
+	when aotu called:
+	to_a: 
+	to_arr: when using array methods which require an array as argument and modify array content, ex: +, concat,
+
+///////////////////Run time hooks and call backs
+what is a runtime hook and what does it do?
+	hook = trigger which then calls specific method
+call back for method missing:
+	method_missing(nameSym, all arguments, &code block)
+call back: expanding the collection of methods for any object
+	for module: when module get mixed in: included?/expended?/prepended?(Const_class)
+
+	for class: when new instance method added or existing one get modified/alias: method_added(methodSym)
+		when class get sub classed/inherited: inherited(classConst)
+
+	for all objects: when singelton methods added: 
+		singelton_method_added(methodSym)
+
+call back: constant missing
+	the scope where constant is looked up: const_missing(constConst)
+
+///////////////////Sending command to the system:
+three ways to send command to system, and each's return
+	system "commandStr": command actually carries out, return true
+	`command`: might not actually carries out command returns string obj
+	%x{comand}: might not actually carries out command returns string obj
+
+///////////////////load VS Require Vs require_relative:
+compare both of them with include/extend/prepend
+	load, require and require relative are for loading external files
+	include/extend/prepend are for attaching modules around
+how do they look for files to read? with/out absolute path.
+	both load and require look at $: file loading path
+	but load will look at current working directory after
+	require relative only look at current working directory
+what can they read? (data type, file extention needed?) what happens right reading the file?
+	require and require_relative can only read C and Ruby file. 
+		extention must be correct or be ommited
+	load can only read Ruby files, and extension must be provide if any. (doesn't have to be .rb)
+what could happen to the Constant and Global variables in the target file and ruby?(load and protect)
+	All Constant and Global Variables get over written
+	exception: load(file, true) true = protecting constance.
+how do they deal with reading the same file over and over? what are the global variables to determine?
+	$LOAD_FEATURES = all the files already loaded
+	require and require_relative don't reload
+	but load does reload and update.
